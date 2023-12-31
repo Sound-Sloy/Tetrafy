@@ -45,6 +45,11 @@ Game::Game(int32_t width, int32_t height, std::string windowTitle)
 	Globals::Textures::OptionsHovered = LoadTexture("./assets/options_hovered.png");
 	Globals::Textures::OptionsClicked = Globals::Textures::OptionsHovered;
 	Globals::Textures::OptionsInactive = Globals::Textures::OptionsActive;
+	Globals::Textures::HotkeyFocus = LoadTexture("./assets/hotkey_focus.png");
+	Globals::Textures::HotkeyActive = LoadTexture("./assets/hotkey_active.png");
+	Globals::Textures::HotkeyInactive = Globals::Textures::HotkeyActive;
+	Globals::Textures::HotkeyHovered = Globals::Textures::HotkeyActive;
+	Globals::Textures::HotkeyClicked = Globals::Textures::HotkeyActive;
 
 	Globals::Colors::BackgroundColor = Color(20, 20, 30, 255);
 

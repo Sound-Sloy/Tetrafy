@@ -59,6 +59,10 @@ void ScreenManager::Update(float deltaTime) {
 			m_PauseScreen.SetActive(false);
 			break;
 		}
+		case ScreensE::Controls: {
+			m_ControlsScreen.Update();
+			break;
+		}
 	}
 }
 
@@ -79,6 +83,10 @@ void ScreenManager::Draw() {
 		}
 		case ScreensE::Options: {
 			m_OptionsScreen->Draw();
+			break;
+		}
+		case ScreensE::Controls: {
+			m_ControlsScreen.Draw();
 			break;
 		}
 	}

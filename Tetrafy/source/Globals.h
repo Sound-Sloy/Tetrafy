@@ -45,6 +45,11 @@ namespace Globals {
 		inline Texture2D OptionsHovered;
 		inline Texture2D OptionsClicked;
 		inline Texture2D OptionsInactive;
+		inline Texture2D HotkeyFocus;
+		inline Texture2D HotkeyActive;
+		inline Texture2D HotkeyInactive;
+		inline Texture2D HotkeyClicked;
+		inline Texture2D HotkeyHovered;
 	}
 
 	namespace Colors {

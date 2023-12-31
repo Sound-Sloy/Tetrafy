@@ -1,8 +1,9 @@
 #pragma once
-#include <cstdint>
+#include <iostream>
 #include <raylib.h>
 #include <functional>
 #include <unordered_map>
+#include <assert.h>
 #include "Vec2.h"
 #include "Keyboard.h"
 #include "Text.h"
@@ -16,7 +17,7 @@ enum class HotkeyTextAlignment {
 };
 
 struct HotkeyProperties {
-	bool TextureMode = false;
+	//bool TextureMode = false;
 
 	Texture2D& ActiveTexture;
 	Texture2D& InactiveTexture;
@@ -30,13 +31,13 @@ struct HotkeyProperties {
 	float FontSpacing = 1.f;
 
 	Color ForegroundColor = WHITE;
-	Color BackgroundColor = Color(0.f, 0.f, 0.f, 0.f);
+	/*Color BackgroundColor = Color(0.f, 0.f, 0.f, 0.f);
 	Color BorderColor = WHITE;
 	Color ClickColor = Color(255.f, 255.f, 255.f, 100.f);
 	Color HoverColor = Color(255.f, 255.f, 255.f, 50.f);
 	int32_t BorderSize = 2;
 	float BorderRoundness = 4.f;
-	int32_t BorderSegments = 4;
+	int32_t BorderSegments = 4;*/
 
 
 };
@@ -49,7 +50,7 @@ public:
 	/// The most explicit constructor
 	/// </summary>
 	/// <param name="pos">The pos</param>
-	/// <param name="size">The size</param>
+	/// <param name="size">On texture mode, if size == {0,0} then size will be the size of ActiveTexture.</param>
 	/// <param name="origin">The origin. Range [0.f,1.f]; {.60f, .20f} => 60% of size.x and 20% of size.y</param>
 	/// <param name="hotkey">The variable to modify & get the starting value. Leave as nullptr to disable this feature (SetHotkey() & GetHotkey() can be used instead)</param>
 	/// <param name="properties">HotkeyProperties object</param>
@@ -84,6 +85,10 @@ private:
 	bool m_bActive = true;
 	bool m_bFocus = false;
 	bool m_WasHovered = false;
+	float m_PulseClock = 0.f;
+	bool m_TextPulseShow = true;
+
+	Font m_DefaultFont = GetFontDefault();
 	
 	HotkeyProperties m_Properties;
 	KeyboardKey m_LocalHotkey = KeyboardKey::KEY_NULL;

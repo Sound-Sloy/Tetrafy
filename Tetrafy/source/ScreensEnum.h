@@ -5,5 +5,6 @@ enum class ScreensE {
 	Board,
 	Pause,
 	Main,
-	Options
+	Options,
+	Controls
 };

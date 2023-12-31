@@ -3,6 +3,7 @@
 Text::Text(std::string text, Vec2<int32_t> pos, Vec2<float> origin, Font& font, float fontSize, float fontSpacing, float rotation, Color color)
 	: m_Text(text), m_Pos(pos), m_Font(font), m_FontSize(fontSize), m_FontSpacing(fontSpacing), m_Rotation(rotation), m_Color(color)
 {
+	m_fOrigin = origin;
 	Vector2 textmeasurement = MeasureTextEx(font, text.c_str(), fontSize, fontSpacing);
 	m_Origin = { (int32_t)(origin.GetX() * textmeasurement.x), (int32_t)(origin.GetY() * textmeasurement.y) };
 }
@@ -32,7 +33,10 @@ void Text::DrawAt(Vec2<int32_t> pos) {
 void Text::SetText(std::string text) {
 	m_Text = text;
 	Vector2 textmeasurement = MeasureTextEx(m_Font, text.c_str(), m_FontSize, m_FontSpacing);
-	m_Origin = { (int32_t)(m_Origin.GetX() * textmeasurement.x), (int32_t)(m_Origin.GetY() * textmeasurement.y) };
+	std::cout << textmeasurement.x << " " << textmeasurement.y << std::endl;
+	m_Origin = { (int32_t)(m_fOrigin.GetX() * textmeasurement.x), (int32_t)(m_fOrigin.GetY() * textmeasurement.y) };
+	std::cout << m_Origin.GetX() << " " << m_Origin.GetY() << std::endl;
+
 }
 
 std::string Text::GetText() const {

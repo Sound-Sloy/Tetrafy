@@ -3,13 +3,37 @@
 Hotkey::Hotkey(Vec2<int32_t> pos, Vec2<int32_t> size, Vec2<float> origin, KeyboardKey* hotkey, HotkeyProperties properties)
 	: m_Pos(pos), m_Size(size), m_Properties(properties)
 {
+	if (m_Properties.Font == nullptr) {
+		m_Properties.Font = &m_DefaultFont;
+	}
+
+	if (/*properties.TextureMode*/ true) {
+		assert(IsTextureReady(properties.ActiveTexture));
+		assert(IsTextureReady(properties.InactiveTexture));
+		assert(IsTextureReady(properties.ClickedTexture));
+		assert(IsTextureReady(properties.HoveredTexture));
+		assert(IsTextureReady(properties.FocusedTexture));
+
+		if (size == Vec2{ 0,0 }) {
+			size = { properties.ActiveTexture.width, properties.ActiveTexture.height };
+			m_Size = { properties.ActiveTexture.width, properties.ActiveTexture.height };
+		}
+	}
+	
+
 	m_Origin = { (int32_t)(origin.GetX() * size.GetX()), (int32_t)(origin.GetY() * size.GetY())};
 	m_pHotkey = hotkey == nullptr ? &m_LocalHotkey : hotkey;
 
 	int32_t xPos = pos.GetX() - m_Origin.GetX() + (int32_t)properties.TextAlignment * size.GetX() / 2;
 	float xOrigin = (int32_t)properties.TextAlignment * .5f;
 
-	m_Text = Text("", { xPos, pos.GetY() - m_Origin.GetY() + size.GetY() / 2 }, { xOrigin, .5f }, *properties.Font, properties.FontSize, properties.FontSpacing, 0.f, properties.ForegroundColor);
+	std::string text = "";
+
+	if (hotkey != nullptr)
+		text = Keyboard::KeyNames[*hotkey];
+
+	std::cout << pos.GetY() - m_Origin.GetY() + size.GetY() / 2 << std::endl;
+	m_Text = Text(text, { xPos, pos.GetY() - m_Origin.GetY() + size.GetY() / 2 }, { xOrigin, .5f }, *properties.Font, properties.FontSize, properties.FontSpacing, 0.f, properties.ForegroundColor);
 }
 
 Hotkey::Hotkey(int32_t posX, int32_t posY, int32_t sizeX, int32_t sizeY, float originX, float originY, KeyboardKey* hotkey, HotkeyProperties properties)
@@ -56,6 +80,9 @@ void Hotkey::Update(float deltaTime) {
 	}
 	else m_WasHovered = false;
 
+	if (!m_bFocus) {
+		return;
+	}
 
 	KeyboardKey pressedKey = Keyboard::GetKeyPressed();
 	*m_pHotkey = pressedKey == KeyboardKey::KEY_NULL ? *m_pHotkey : pressedKey;
@@ -67,13 +94,43 @@ void Hotkey::Update(float deltaTime) {
 
 	if (lastHotkey != *m_pHotkey) {
 		
-		m_Text.SetText(Keyboard::KeyNames[KEY_NULL]);
+		m_Text.SetText(Keyboard::KeyNames[*m_pHotkey]);
+		std::cout << m_Text.GetText() << std::endl;
 		
 		if(OnChange) OnChange(lastHotkey, *m_pHotkey);
+	}
+
+	m_PulseClock += deltaTime;
+	if (m_PulseClock <= .2f) {
+		m_TextPulseShow = true;
+	}
+	if (m_PulseClock > .2f) {
+		m_TextPulseShow = false;
+	}
+	if (m_PulseClock >= .4f) {
+		m_PulseClock -= 4.f;
+		m_TextPulseShow = true;
+
 	}
 }
 
 void Hotkey::Draw() {
+
+	if (!m_bActive) {
+		DrawTexturePro(m_Properties.InactiveTexture, { 0,0,(float)m_Properties.InactiveTexture.width,(float)m_Properties.InactiveTexture.height }, { (float)m_Pos.GetX(), (float)m_Pos.GetY(), (float)m_Size.GetX(), (float)m_Size.GetY() }, m_Origin, 0.f, WHITE);
+		m_Text.Draw();
+	}
+	else {
+		if (!m_bFocus) {
+			DrawTexturePro(m_Properties.ActiveTexture, { 0,0,(float)m_Properties.ActiveTexture.width,(float)m_Properties.ActiveTexture.height }, { (float)m_Pos.GetX(), (float)m_Pos.GetY(), (float)m_Size.GetX(), (float)m_Size.GetY() }, m_Origin, 0.f, WHITE);
+			m_Text.Draw();
+			return;
+		}
+	}
+	if (m_bFocus) {
+		DrawTexturePro(m_Properties.FocusedTexture, { 0,0,(float)m_Properties.FocusedTexture.width,(float)m_Properties.FocusedTexture.height }, { (float)m_Pos.GetX(), (float)m_Pos.GetY(), (float)m_Size.GetX(), (float)m_Size.GetY() }, m_Origin, 0.f, WHITE);
+		if (m_TextPulseShow) m_Text.Draw();
+	}
 
 }
 
@@ -88,7 +145,7 @@ void Hotkey::SetActive(bool active) {
 bool Hotkey::IsHovered() {
 	Vector2 mousePos = GetMousePosition();
 	return CheckCollisionPointRec(mousePos,
-		{ (float)m_Pos.GetX(), (float)m_Pos.GetY(),
+		{ (float)m_Pos.GetX() - (float)m_Origin.GetX(), (float)m_Pos.GetY() - (float)m_Origin.GetY(),
 		(float)m_Size.GetX(), (float)m_Size.GetY() });
 }
 
@@ -97,11 +154,19 @@ bool Hotkey::IsClicked() {
 }
 
 void Hotkey::DrawHoverEffect() {
-	DrawRectangleRounded({ (float)m_Pos.GetX(), (float)m_Pos.GetY(), (float)m_Size.GetX(), (float)m_Size.GetY() },
-		m_Properties.BorderRoundness, m_Properties.BorderSegments, m_Properties.HoverColor);
+	if (/*m_Properties.TextureMode */ true) {
+		DrawTexturePro(m_Properties.HoveredTexture, { 0,0,(float)m_Properties.HoveredTexture.width,(float)m_Properties.HoveredTexture.height }, { (float)m_Pos.GetX(), (float)m_Pos.GetY(), (float)m_Size.GetX(), (float)m_Size.GetY() }, m_Origin, 0.f, WHITE);
+		return;
+	}
+	/*DrawRectangleRounded({ (float)m_Pos.GetX(), (float)m_Pos.GetY(), (float)m_Size.GetX(), (float)m_Size.GetY() },
+		m_Properties.BorderRoundness, m_Properties.BorderSegments, m_Properties.HoverColor);*/
 }
 
 void Hotkey::DrawClickEffect() {
-	DrawRectangleRounded({ (float)m_Pos.GetX(), (float)m_Pos.GetY(), (float)m_Size.GetX(), (float)m_Size.GetY() },
-		m_Properties.BorderRoundness, m_Properties.BorderSegments, m_Properties.ClickColor);
+	if (/*m_Properties.TextureMode */ true) {
+		DrawTexturePro(m_Properties.ClickedTexture, { 0,0,(float)m_Properties.ClickedTexture.width,(float)m_Properties.ClickedTexture.height }, { (float)m_Pos.GetX(), (float)m_Pos.GetY(), (float)m_Size.GetX(), (float)m_Size.GetY() }, m_Origin, 0.f, WHITE);
+		return;
+	}
+	/*DrawRectangleRounded({ (float)m_Pos.GetX(), (float)m_Pos.GetY(), (float)m_Size.GetX(), (float)m_Size.GetY() },
+		m_Properties.BorderRoundness, m_Properties.BorderSegments, m_Properties.ClickColor);*/
 }

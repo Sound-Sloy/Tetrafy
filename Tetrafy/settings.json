@@ -1,5 +1,12 @@
 {
     "HardDropToggle": true,
+    "KeyHardDrop": 32,
+    "KeyHold": 72,
+    "KeyMoveLeft": 263,
+    "KeyMoveRight": 262,
+    "KeyRotateCCW": 344,
+    "KeyRotateCW": 265,
+    "KeySoftDrop": 264,
     "LandingPreviews": true,
     "MusicToggle": false,
     "MusicVolume": 1.0,

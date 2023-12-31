@@ -6,7 +6,7 @@
 #include "MainScreen.h"
 #include "Board.h"
 #include "States.h"
-
+#include "ControlsScreen.h"
 
 class ScreenManager {
 public:
@@ -28,6 +28,7 @@ private:
 	PauseScreen m_PauseScreen;
 	OptionsScreen* m_OptionsScreen = new OptionsScreen();
 	MainScreen* m_MainScreen = new MainScreen();
+	ControlsScreen m_ControlsScreen;
 };
 
 //#endif

@@ -9,7 +9,6 @@ class FuturePiecesGUIComponent
 public:
 	FuturePiecesGUIComponent() = default;
 	FuturePiecesGUIComponent(Vec2<int32_t> pos, std::deque<Tetromino>& tetrominos);
-	//FuturePiecesGUIComponent& operator=(const FuturePiecesGUIComponent& other);
 	~FuturePiecesGUIComponent();
 	void Update();
 	void Draw();

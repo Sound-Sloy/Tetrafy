@@ -36,6 +36,8 @@ private:
 
 	Vec2<int32_t> m_Pos = {0,0};
 	Vec2<int32_t> m_Origin = { 0,0 };
+	Vec2<float> m_fOrigin = { 0.f, 0.f };
+
 	Font m_Font = GetFontDefault();
 	float m_FontSize = 0.f;
 	float m_FontSpacing = 1.f;
