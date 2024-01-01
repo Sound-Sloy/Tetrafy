@@ -6,7 +6,6 @@
 #include "Vec2.h"
 
 
-//TODO: Continue this. There is no need for this YET
 class Text {
 public:
 	Text() = default;

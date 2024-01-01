@@ -8,6 +8,7 @@
 #include "Slider.h"
 #include "Vec2.h"
 #include "Utils.h"
+#include "Text.h"
 
 class OptionsScreen {
 public:
@@ -18,12 +19,16 @@ public:
 
 	
 private:
+	ScreensE m_ScrBefOptions = ScreensE::None;
+
+	Text m_Title;
 	Switch* m_MusicSwitch;
 	Switch* m_SFXSwitch;
 	Switch* m_SoftDropSwitch;
 	Switch* m_HardDropSwitch;
 	Switch* m_LandingPreviewSwitch;
-	Button* m_BackButton;
+	Button m_BackButton;
+	Button m_ControlsButton;
 	Slider<float>* m_MusicVolumeSlider;
 	Slider<float>* m_SFXVolumeSlider;
 

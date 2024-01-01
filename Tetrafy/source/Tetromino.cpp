@@ -194,28 +194,31 @@ void Tetromino::Update(float deltaTime, int32_t level) {
 	}
 
 
-	if (IsKeyPressed(KeyboardKey::KEY_W) or IsKeyPressed(KeyboardKey::KEY_UP)) {
+	if (IsKeyPressed(Globals::Options.KeyRotateCW)) {
 		this->Rotate(TetrominoRotation::Clockwise);
 	}
+	if (IsKeyPressed(Globals::Options.KeyRotateCCW)) {
+		this->Rotate(TetrominoRotation::Counterclockwise);
+	}
 
-	if (Globals::KeyboardManager.IsKeyPressedRepeated(KeyboardKey::KEY_A) or Globals::KeyboardManager.IsKeyPressedRepeated(KeyboardKey::KEY_LEFT)) {
+	if (Globals::KeyboardManager.IsKeyPressedRepeated(Globals::Options.KeyLeft)) {
 		this->MoveLeft();
 	}
-	else if (Globals::KeyboardManager.IsKeyPressedRepeated(KeyboardKey::KEY_D) or Globals::KeyboardManager.IsKeyPressedRepeated(KeyboardKey::KEY_RIGHT)) {
+	else if (Globals::KeyboardManager.IsKeyPressedRepeated(Globals::Options.KeyRight)) {
 		this->MoveRight();
 	}
 	
 	// Soft drop
 	float speed = this->m_DownSpeed + this->m_DownSpeed * 0.3 * (level - 1);
 	bool softdropping = false;
-	if (Globals::Options.SoftDropToggle and (IsKeyDown(KeyboardKey::KEY_S) or IsKeyDown(KeyboardKey::KEY_DOWN))) {
+	if (Globals::Options.SoftDropToggle and IsKeyDown(Globals::Options.KeySoftDrop)) {
 		speed = speed * m_SoftDropMultiplier;
 		softdropping = true;
 	}
 	// ---
 
 	// Hard drop
-	if (Globals::Options.HardDropToggle and IsKeyPressed(KeyboardKey::KEY_SPACE) and !m_bInSolidification) {
+	if (Globals::Options.HardDropToggle and IsKeyPressed(Globals::Options.KeyHardDrop) and !m_bInSolidification) {
 		Vec2<int32_t> landingPos = GetLandingPos();
 		this->m_ScoreAccumulated += 2 * (landingPos.GetY() - this->m_Pos.GetY());
 		this->m_Pos = landingPos;

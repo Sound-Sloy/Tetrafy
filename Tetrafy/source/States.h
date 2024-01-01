@@ -3,7 +3,7 @@
 
 namespace States {
 	inline bool ForceClose = false;
-	inline ScreensE CurrentScreen = ScreensE::Controls;
+	inline ScreensE CurrentScreen = ScreensE::Main;
 	inline ScreensE LastScreen = ScreensE::None;
 
 	inline static void ChangeScreen(ScreensE screen) {

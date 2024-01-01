@@ -2,6 +2,8 @@
 
 OptionsScreen::OptionsScreen()
 {
+	m_Title = Text("Options", { GetRenderWidth() / 2,125 }, { .5f,.5f }, Globals::TetrisFontBig, 72.f);
+
 	Vector2 musicSwitchTextMeasurements = MeasureTextEx(Globals::TetrisFont, "Music", 28.f, 1.f);
 	m_SFXSwitchTextPos = m_MusicSwitchTextPos + Vec2<int32_t>{0, (int32_t)musicSwitchTextMeasurements.y + m_Padding};
 	Vector2 SFXSwitchTextMeasurements = MeasureTextEx(Globals::TetrisFont, "SFX", 28.f, 1.f);
@@ -26,17 +28,17 @@ OptionsScreen::OptionsScreen()
 	int32_t maxX = Utils::max<float>({ musicSwitchTextMeasurements.x, SFXSwitchTextMeasurements.x, softDropSwitchTextMeasurements.x, hardDropSwitchTextMeasurements.x, landingPrevwSwitchTextMeasurements.x });
 
 	int32_t switchXCoord = m_MusicSwitchTextPos.GetX() + maxX + m_Padding;
-	Vec2<int32_t> musicSwitchPos = { switchXCoord, m_MusicSwitchTextPos.GetY() + (int32_t)(musicSwitchTextMeasurements.y - switchProperties.Size.GetY()) / 2};
-	Vec2<int32_t> SFXSwitchPos = { switchXCoord, m_SFXSwitchTextPos.GetY() + (int32_t)(SFXSwitchTextMeasurements.y - switchProperties.Size.GetY()) / 2 };
-	Vec2<int32_t> softDropSwitchPos = { switchXCoord, m_SoftDropSwitchTextPos.GetY() + (int32_t)(softDropSwitchTextMeasurements.y - switchProperties.Size.GetY()) / 2 };
-	Vec2<int32_t> hardDropSwitchPos = { switchXCoord, m_HardDropSwitchTextPos.GetY() + (int32_t)(hardDropSwitchTextMeasurements.y - switchProperties.Size.GetY()) / 2 };
+	Vec2<int32_t> musicSwitchPos		= { switchXCoord, m_MusicSwitchTextPos.GetY() + (int32_t)(musicSwitchTextMeasurements.y - switchProperties.Size.GetY()) / 2};
+	Vec2<int32_t> SFXSwitchPos			= { switchXCoord, m_SFXSwitchTextPos.GetY() + (int32_t)(SFXSwitchTextMeasurements.y - switchProperties.Size.GetY()) / 2 };
+	Vec2<int32_t> softDropSwitchPos		= { switchXCoord, m_SoftDropSwitchTextPos.GetY() + (int32_t)(softDropSwitchTextMeasurements.y - switchProperties.Size.GetY()) / 2 };
+	Vec2<int32_t> hardDropSwitchPos		= { switchXCoord, m_HardDropSwitchTextPos.GetY() + (int32_t)(hardDropSwitchTextMeasurements.y - switchProperties.Size.GetY()) / 2 };
 	Vec2<int32_t> landingPrevwSwitchPos = { switchXCoord, m_LandingPreviewSwitchTextPos.GetY() + (int32_t)(landingPrevwSwitchTextMeasurements.y - switchProperties.Size.GetY()) / 2 };
 
-	m_MusicSwitch = new Switch(musicSwitchPos, switchProperties);
-	m_SFXSwitch = new Switch(SFXSwitchPos, switchProperties);
-	m_SoftDropSwitch = new Switch(softDropSwitchPos, switchProperties);
-	m_HardDropSwitch = new Switch(hardDropSwitchPos, switchProperties);
-	m_LandingPreviewSwitch = new Switch(landingPrevwSwitchPos, switchProperties);
+	m_MusicSwitch			= new Switch(musicSwitchPos, switchProperties);
+	m_SFXSwitch				= new Switch(SFXSwitchPos, switchProperties);
+	m_SoftDropSwitch		= new Switch(softDropSwitchPos, switchProperties);
+	m_HardDropSwitch		= new Switch(hardDropSwitchPos, switchProperties);
+	m_LandingPreviewSwitch  = new Switch(landingPrevwSwitchPos, switchProperties);
 
 	m_MusicSwitch->SetState((SwitchStatesE)Globals::Options.MusicToggle);
 	m_SFXSwitch->SetState((SwitchStatesE)Globals::Options.SFXToggle);
@@ -75,17 +77,32 @@ OptionsScreen::OptionsScreen()
 		.FontSize = 28.f,
 		.BorderSegments = 32
 	};
-	m_BackButton = new Button({ (728 - 100) / 2,650 }, { 100, 50 }, "Back", buttonProperties);
-	m_BackButton->OnClick = []() {
-		States::ChangeScreen(States::LastScreen); 
+	m_ControlsButton = Button({ (GetRenderWidth() - 200) / 2, 570 }, { 200,50 }, "Controls", buttonProperties);
+	
+	m_ControlsButton.OnClick = []() {
+		States::ChangeScreen(ScreensE::Controls);
 		Globals::SoundManagerInstance->PlaySoundNowUnique(Globals::Sounds::ClickSound);
 	};
-	m_BackButton->OnHover = []() { 
+	m_ControlsButton.OnHover = []() {
+		Globals::SoundManagerInstance->PlaySoundNowUnique(Globals::Sounds::HoverSound);
+	};
+
+	m_BackButton = Button({ (GetRenderWidth() - 200) / 2, 650}, {200, 50}, "Back", buttonProperties);
+	m_BackButton.OnClick = [this]() {
+		States::ChangeScreen(m_ScrBefOptions); 
+		m_ScrBefOptions = ScreensE::None;
+		Globals::SoundManagerInstance->PlaySoundNowUnique(Globals::Sounds::ClickSound);
+	};
+	m_BackButton.OnHover = []() { 
 		Globals::SoundManagerInstance->PlaySoundNowUnique(Globals::Sounds::HoverSound); 
 	};
 }
 
 void OptionsScreen::Update() {
+	if (m_ScrBefOptions == ScreensE::None) {
+		m_ScrBefOptions = States::LastScreen;
+	}
+
 	m_MusicSwitch->Update();
 	m_SFXSwitch->Update();
 	m_SoftDropSwitch->Update();
@@ -93,16 +110,16 @@ void OptionsScreen::Update() {
 	m_LandingPreviewSwitch->Update();
 
 	//m_MusicVolumeSlider->Update();
-	m_BackButton->Update();
+	m_ControlsButton.Update();
+	m_BackButton.Update();
 }
 
 void OptionsScreen::Draw() {
-	ClearBackground(Globals::Colors::BackgroundColor);
+	//ClearBackground(Globals::Colors::BackgroundColor);
 
-	Vector2 titleMeasurement = MeasureTextEx(Globals::TetrisFontBig, "OPTIONS", 72.f, 1.f);
-	Vector2 titlePos = { ((float)GetRenderWidth() - titleMeasurement.x) / 2, 50.f };
+	m_Title.Draw();
 
-	DrawTextEx(Globals::TetrisFontBig, "OPTIONS", titlePos, 72.f, 1.f, WHITE);
+
 	DrawTextEx(Globals::TetrisFont, "Music", m_MusicSwitchTextPos, 28.f, 1.f, WHITE);
 	DrawTextEx(Globals::TetrisFont, "SFX", m_SFXSwitchTextPos, 28.f, 1.f, WHITE);
 	DrawTextEx(Globals::TetrisFont, "Soft Drop", m_SoftDropSwitchTextPos, 28.f, 1.f, WHITE);
@@ -117,6 +134,7 @@ void OptionsScreen::Draw() {
 	m_LandingPreviewSwitch->Draw();
 	
 	//m_MusicVolumeSlider->Draw();
-	m_BackButton->Draw();
+	m_ControlsButton.Draw();
+	m_BackButton.Draw();
 
 }

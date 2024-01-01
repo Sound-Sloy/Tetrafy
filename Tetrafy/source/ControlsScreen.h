@@ -3,6 +3,8 @@
 #include "Globals.h"
 #include "Text.h"
 #include "HotkeyWidget.h"
+#include "Button.h"
+#include "States.h"
 
 class ControlsScreen {
 public:
@@ -12,7 +14,7 @@ public:
 	void Update();
 	void Draw();
 private:
-	Text m_TitleScreen;
+	Text m_Title;
 
 	Text m_LeftText;
 	Text m_RightText;
@@ -22,11 +24,13 @@ private:
 	Text m_HardDropText;
 	Text m_HoldText;
 
-	Hotkey* m_LeftHotkey;
-	Hotkey* m_RightHotkey;
-	Hotkey* m_RotCWHotkey;
-	Hotkey* m_RotCCWHotkey;
-	Hotkey* m_SoftDropHotkey;
-	Hotkey* m_HardDropHotkey;
-	Hotkey* m_HoldHotkey;
+	std::unique_ptr<Hotkey> m_LeftHotkey;
+	std::unique_ptr<Hotkey> m_RightHotkey;
+	std::unique_ptr<Hotkey> m_RotCWHotkey;
+	std::unique_ptr<Hotkey> m_RotCCWHotkey;
+	std::unique_ptr<Hotkey> m_SoftDropHotkey;
+	std::unique_ptr<Hotkey> m_HardDropHotkey;
+	std::unique_ptr<Hotkey> m_HoldHotkey;
+
+	Button m_BackButton;
 };

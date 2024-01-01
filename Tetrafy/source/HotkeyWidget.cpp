@@ -32,7 +32,6 @@ Hotkey::Hotkey(Vec2<int32_t> pos, Vec2<int32_t> size, Vec2<float> origin, Keyboa
 	if (hotkey != nullptr)
 		text = Keyboard::KeyNames[*hotkey];
 
-	std::cout << pos.GetY() - m_Origin.GetY() + size.GetY() / 2 << std::endl;
 	m_Text = Text(text, { xPos, pos.GetY() - m_Origin.GetY() + size.GetY() / 2 }, { xOrigin, .5f }, *properties.Font, properties.FontSize, properties.FontSpacing, 0.f, properties.ForegroundColor);
 }
 

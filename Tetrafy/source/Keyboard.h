@@ -3,7 +3,7 @@
 #include <string>
 #include <unordered_map>
 
-static class Keyboard {
+class Keyboard {
 public:
 	bool IsKeyPressedRepeated(KeyboardKey key);
 	static KeyboardKey GetKeyPressed();

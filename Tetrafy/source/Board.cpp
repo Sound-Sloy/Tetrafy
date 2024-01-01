@@ -151,7 +151,7 @@ void Board::Update(float deltaTime) {
 		}
 	}
 
-	if (IsKeyPressed(KeyboardKey::KEY_H)) {
+	if (IsKeyPressed(Globals::Options.KeyHold)) {
 		if (!this->m_HeldTetromino.Exists()) {
 			this->m_HeldTetromino = { this->m_Tetrominos.front() };
 			this->m_Tetrominos.pop_front();
