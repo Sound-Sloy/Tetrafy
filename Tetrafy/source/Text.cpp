@@ -35,7 +35,6 @@ void Text::SetText(std::string text) {
 	Vector2 textmeasurement = MeasureTextEx(m_Font, text.c_str(), m_FontSize, m_FontSpacing);
 	std::cout << textmeasurement.x << " " << textmeasurement.y << std::endl;
 	m_Origin = { (int32_t)(m_fOrigin.GetX() * textmeasurement.x), (int32_t)(m_fOrigin.GetY() * textmeasurement.y) };
-	std::cout << m_Origin.GetX() << " " << m_Origin.GetY() << std::endl;
 
 }
 

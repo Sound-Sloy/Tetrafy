@@ -183,7 +183,6 @@ Vec2<int32_t> Board::GetGridSize() const {
 void Board::SetOver(bool over) {
 	this->m_bGameOver = over;
 	if (over) {
-		std::cout << (uint32_t)m_ScoreGUIComponent.GetScore() << " " << Globals::HighScore << std::endl;
 		m_DeathScreen = new DeathScreen{ (uint32_t)m_ScoreGUIComponent.GetScore(), Globals::HighScore, (uint32_t)m_LevelGUIComponent.GetLevel()};
 		Globals::HighScore = std::max((uint32_t)m_ScoreGUIComponent.GetScore(), Globals::HighScore);
 	}

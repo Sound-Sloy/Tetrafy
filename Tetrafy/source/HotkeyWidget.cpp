@@ -94,7 +94,6 @@ void Hotkey::Update(float deltaTime) {
 	if (lastHotkey != *m_pHotkey) {
 		
 		m_Text.SetText(Keyboard::KeyNames[*m_pHotkey]);
-		std::cout << m_Text.GetText() << std::endl;
 		
 		if(OnChange) OnChange(lastHotkey, *m_pHotkey);
 	}
