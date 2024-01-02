@@ -99,16 +99,14 @@ void Hotkey::Update(float deltaTime) {
 	}
 
 	m_PulseClock += deltaTime;
-	if (m_PulseClock <= .2f) {
+	if (m_PulseClock <= .3f) {
 		m_TextPulseShow = true;
 	}
-	if (m_PulseClock > .2f) {
+	if (m_PulseClock > .3f) {
 		m_TextPulseShow = false;
 	}
-	if (m_PulseClock >= .4f) {
-		m_PulseClock -= 4.f;
-		m_TextPulseShow = true;
-
+	if (m_PulseClock >= .6f) {
+		m_PulseClock -= .6f;
 	}
 }
 

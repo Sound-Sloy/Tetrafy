@@ -20,8 +20,8 @@ void SoundManager::PlaySoundNow(Sound& sound) {
 }
 
 void SoundManager::PlaySoundNowUnique(Sound& sound) {
-	if (m_Options.SFXToggle) {
-		StopSound(sound);
+	if (m_Options.SFXToggle and !IsSoundPlaying(sound)) {
+		//StopSound(sound);
 		SetSoundVolume(sound, m_Options.SFXVolume);
 		PlaySound(sound);
 	}
