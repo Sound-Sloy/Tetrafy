@@ -209,7 +209,7 @@ void Tetromino::Update(float deltaTime, int32_t level) {
 	}
 	
 	// Soft drop
-	float speed = this->m_DownSpeed + this->m_DownSpeed * 0.3 * (level - 1);
+	float speed = this->m_DownSpeed + this->m_DownSpeed * .3f * (level - 1);
 	bool softdropping = false;
 	if (Globals::Options.SoftDropToggle and IsKeyDown(Globals::Options.KeySoftDrop)) {
 		speed = speed * m_SoftDropMultiplier;

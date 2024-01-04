@@ -2,8 +2,7 @@
 
 ScreenManager::ScreenManager()
 {
-	delete m_Board;
-	m_Board = new Board({ { 100,50 }, {10,20} });
+	m_Board = std::make_unique<Board>(Vec2{ 100,50 }, Vec2{10,20});
 	PauseScreenInstance = &m_PauseScreen;
 	if (!PauseScreenInstance) {
 		TraceLog(LOG_FATAL, "PauseScreenInstance == nullptr");
@@ -31,8 +30,7 @@ void ScreenManager::Update(float deltaTime) {
 	}
 
 	if (m_PauseScreen.FlagShouldRestartBoard or States::Flags::ForceResetBoard) {
-		delete m_Board;
-		m_Board = new Board({ { 100,50 }, {10,20} });
+		m_Board = std::make_unique<Board>(Vec2{ 100,50 }, Vec2{ 10,20 });
 		m_PauseScreen.FlagShouldRestartBoard = false;
 		States::Flags::ForceResetBoard = false;
 	}

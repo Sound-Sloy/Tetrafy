@@ -69,7 +69,7 @@ private:
 	HeldTetromino m_HeldTetromino;
 	std::deque<TetrominosE> m_NextShapes;
 
-	DeathScreen* m_DeathScreen;
+	std::unique_ptr<DeathScreen> m_DeathScreen;
 
 	Vec2<int32_t> GetPXSize() const;
 	void HandleBravo(int32_t clearedLines);

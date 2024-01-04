@@ -11,7 +11,7 @@ public:
 	static std::unordered_map<KeyboardKey, std::string> KeyNames;
 
 private:
-	float RepeatDelay = .12f;
+	float RepeatDelay = .11f;
 	std::unordered_map<KeyboardKey, float> keyDelayMap;
 
 };

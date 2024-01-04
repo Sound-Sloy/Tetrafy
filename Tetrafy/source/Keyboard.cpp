@@ -10,7 +10,7 @@ bool Keyboard::IsKeyPressedRepeated(KeyboardKey key) {
 	if (GetTime()-this->keyDelayMap[key] < this->RepeatDelay) {
 		return false;
 	}
-	this->keyDelayMap[key] = GetTime();
+	this->keyDelayMap[key] = (float)GetTime();
 	return true;
 }
 
@@ -25,7 +25,7 @@ KeyboardKey Keyboard::GetKeyPressed()
 }
 
 std::unordered_map<KeyboardKey, std::string> Keyboard::KeyNames = {
-        {KeyboardKey::KEY_NULL , "NULL"},
+        {KeyboardKey::KEY_NULL , "None"},
         {KeyboardKey::KEY_APOSTROPHE , "'"},
         {KeyboardKey::KEY_COMMA , ","},
         {KeyboardKey::KEY_MINUS , "-"},

@@ -20,7 +20,7 @@ void LevelGUIComponent::Draw()
 	std::string scoreStr = std::to_string(m_Level);
 	Vector2 scoreTextSize = MeasureTextEx(Globals::TetrisFontMedium, scoreStr.c_str(), 20.f, 1.f);
 
-	DrawRectangleLines(this->m_Pos.GetX() - 5, this->m_Pos.GetY() - 5, this->m_Size.GetX() + 5, this->m_Size.GetY() + 5, RAYWHITE);
-	DrawTextEx(Globals::TetrisFont, "Level", Vector2((float)this->m_Pos.GetX() + (this->m_Size.GetX() - textSize.x) / 2, this->m_Pos.GetY() + 5), 28.f, 1.f, RAYWHITE);
-	DrawTextEx(Globals::TetrisFontMedium, scoreStr.c_str(), Vector2(this->m_Pos.GetX() + (this->m_Size.GetX() - scoreTextSize.x) / 2, this->m_Pos.GetY() + 5 + textSize.y + 10), 20.f, 1.f, m_LevelColor);
+	DrawRectangleLines(m_Pos.GetX() - 5, m_Pos.GetY() - 5, m_Size.GetX() + 5, m_Size.GetY() + 5, RAYWHITE);
+	DrawTextEx(Globals::TetrisFont, "Level", Vector2((float)m_Pos.GetX() + (float)(m_Size.GetX() - textSize.x) / 2, (float)m_Pos.GetY() + 5), 28.f, 1.f, RAYWHITE);
+	DrawTextEx(Globals::TetrisFontMedium, scoreStr.c_str(), Vector2(m_Pos.GetX() + (m_Size.GetX() - scoreTextSize.x) / 2, m_Pos.GetY() + 5 + textSize.y + 10), 20.f, 1.f, m_LevelColor);
 }

@@ -148,6 +148,7 @@
     <ClCompile Include="source\OptionsScreen.cpp" />
     <ClCompile Include="source\PauseScreen.cpp" />
     <ClCompile Include="source\ResourceLoader.cpp" />
+    <ClCompile Include="source\ResPacker.cpp" />
     <ClCompile Include="source\Score.cpp" />
     <ClCompile Include="source\Screen.cpp" />
     <ClCompile Include="source\ScreenManager.cpp" />
@@ -180,6 +181,7 @@
     <ClInclude Include="source\OptionsScreen.h" />
     <ClInclude Include="source\PauseScreen.h" />
     <ClInclude Include="source\ResourceLoader.h" />
+    <ClInclude Include="source\ResPacker.h" />
     <ClInclude Include="source\Score.h" />
     <ClInclude Include="source\Screen.h" />
     <ClInclude Include="source\ScreenManager.h" />

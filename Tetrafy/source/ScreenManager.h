@@ -24,7 +24,7 @@ public:
 private:
 	ScreensE& m_Screen = States::CurrentScreen;
 
-	Board* m_Board = new Board();
+	std::unique_ptr<Board> m_Board;
 	PauseScreen m_PauseScreen;
 	OptionsScreen* m_OptionsScreen = new OptionsScreen();
 	MainScreen* m_MainScreen = new MainScreen();

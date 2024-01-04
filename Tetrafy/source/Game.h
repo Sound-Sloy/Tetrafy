@@ -11,6 +11,8 @@
 #include "Keyboard.h"
 #include "nlohmann/json.hpp"
 
+#include "ResPacker.h"
+
 class Game
 {
 public:
