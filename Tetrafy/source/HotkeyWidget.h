@@ -17,8 +17,6 @@ enum class HotkeyTextAlignment {
 };
 
 struct HotkeyProperties {
-	//bool TextureMode = false;
-
 	Texture2D& ActiveTexture;
 	Texture2D& InactiveTexture;
 	Texture2D& HoveredTexture;
@@ -31,15 +29,6 @@ struct HotkeyProperties {
 	float FontSpacing = 1.f;
 
 	Color ForegroundColor = WHITE;
-	/*Color BackgroundColor = Color(0.f, 0.f, 0.f, 0.f);
-	Color BorderColor = WHITE;
-	Color ClickColor = Color(255.f, 255.f, 255.f, 100.f);
-	Color HoverColor = Color(255.f, 255.f, 255.f, 50.f);
-	int32_t BorderSize = 2;
-	float BorderRoundness = 4.f;
-	int32_t BorderSegments = 4;*/
-
-
 };
 
 class Hotkey {

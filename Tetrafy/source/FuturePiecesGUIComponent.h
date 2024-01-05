@@ -1,8 +1,9 @@
 #pragma once
+#include <deque>
 #include "Vec2.h"
 #include "Tetromino.h"
-#include <deque>
 #include "Globals.h"
+#include "Text.h"
 
 class FuturePiecesGUIComponent
 {
@@ -15,10 +16,11 @@ public:
 private:
 	Vec2<int32_t> m_Pos{0,0};
 	Vec2<int32_t> m_Size{196, 320};
-	Vec2<int32_t> m_TextSize{0,0};
 	int32_t m_SpritesPosY = 0;
-	const int32_t CTetrominoYPadding = 10;
+	const int32_t CPadding = 10;
 	std::deque<Tetromino>& m_Tetrominos;
 
+
+	Text m_TitleText;
 };
 

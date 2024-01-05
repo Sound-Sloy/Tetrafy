@@ -1,5 +1,6 @@
 #include "Tetromino.h"
 
+// Origin is sth like {.5f, 0.f}
 void TetrominoSprite::DrawSprite(TetrominosE shape, Vec2<int32_t> pos, int32_t cellSize, int32_t padding) {
 	const Vec2<int32_t> matSize = TetrominoSprite::GetSpriteMatSize(shape);
 	const Vec2<int32_t> spriteSize = TetrominoSprite::GetSpriteSize(shape, cellSize, padding);

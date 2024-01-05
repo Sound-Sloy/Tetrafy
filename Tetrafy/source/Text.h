@@ -30,6 +30,8 @@ public:
 
 	void SetText(std::string text);
 	std::string GetText() const;
+
+	Vec2<int32_t> GetSize() const;
 private:
 	std::string m_Text = "";
 

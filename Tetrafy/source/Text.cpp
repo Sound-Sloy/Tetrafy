@@ -40,3 +40,9 @@ void Text::SetText(std::string text) {
 std::string Text::GetText() const {
 	return m_Text;
 }
+
+Vec2<int32_t> Text::GetSize() const
+{
+	Vector2 textmsrmt = MeasureTextEx(m_Font, m_Text.c_str(), m_FontSize, m_FontSpacing);
+	return Vec2{ (int32_t)textmsrmt.x, (int32_t)textmsrmt.y };
+}
