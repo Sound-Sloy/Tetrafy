@@ -144,6 +144,7 @@
     <ClCompile Include="source\HotkeyWidget.cpp" />
     <ClCompile Include="source\Keyboard.cpp" />
     <ClCompile Include="source\LevelGUIComponent.cpp" />
+    <ClCompile Include="source\LinesClearedGUIComponent.cpp" />
     <ClCompile Include="source\MainScreen.cpp" />
     <ClCompile Include="source\OptionsScreen.cpp" />
     <ClCompile Include="source\PauseScreen.cpp" />
@@ -174,6 +175,7 @@
     <ClInclude Include="source\HotkeyWidget.h" />
     <ClInclude Include="source\Keyboard.h" />
     <ClInclude Include="source\LevelGUIComponent.h" />
+    <ClInclude Include="source\LinesClearedGUIComponent.h" />
     <ClInclude Include="source\MainScreen.h" />
     <ClInclude Include="source\nlohmann\json.hpp" />
     <ClInclude Include="source\nlohmann\json_fwd.hpp" />

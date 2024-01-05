@@ -13,10 +13,11 @@ Board::Board(Vec2<int32_t> pos, Vec2<int32_t> gridSize, int32_t cellSize, int32_
 	m_GridSize(gridSize),
 	m_CellSize(cellSize),
 	m_CellPadding(cellPadding),
-	m_FuturePiecesGUIComponent({ {pos.GetX() + gridSize.GetX() * (cellSize + cellPadding) + 10, 50}, this->m_Tetrominos }), 
-	m_ScoreGUIComponent({ pos.GetX() + gridSize.GetX() * (cellSize + cellPadding) + 10, 50 + 320 + 10 }, { 196, 75 }), 
-	m_LevelGUIComponent({ {pos.GetX() + gridSize.GetX() * (cellSize + cellPadding) + 10, 50 + 320 + 10 + 75 + 10}, {196, 75} }),
-	m_HeldTetrominoGUIComponent({ {pos.GetX() + gridSize.GetX() * (cellSize + cellPadding) + 10, 50 + 320 + 10 + 75 + 10 + 75 + 10}, {196, 130}, this->m_HeldTetromino})
+	m_FuturePiecesGUIComponent({ {pos.GetX() + gridSize.GetX() * (cellSize + cellPadding) + 10, 50}, this->m_Tetrominos }),
+	m_ScoreGUIComponent({ pos.GetX() + gridSize.GetX() * (cellSize + cellPadding) + 10, 50 + 287 + 10 }, { 196, 75 }),
+	m_LevelGUIComponent({ {pos.GetX() + gridSize.GetX() * (cellSize + cellPadding) + 10, 50 + 287 + 10 + 75 + 10}, {196, 75} }),
+	m_HeldTetrominoGUIComponent({ {pos.GetX() + gridSize.GetX() * (cellSize + cellPadding) + 10, 50 + 287 + 10 + 75 + 10 + 75 + 10}, {196, 130}, this->m_HeldTetromino }),
+	m_LinesClearedGUIComponent({ {pos.GetX() + gridSize.GetX() * (cellSize + cellPadding) + 10, 50 + 287 + 10 + 75 + 10 + 75 + 20 + 130}, {196, 75} })
 {
 	for (int32_t iY = 0; iY < gridSize.GetY(); ++iY) {
 		for (int32_t iX = 0; iX < gridSize.GetX(); ++iX) {
@@ -46,6 +47,7 @@ void Board::Draw() {
 	m_SplashTextController.Draw();
 	m_LevelGUIComponent.Draw();
 	m_HeldTetrominoGUIComponent.Draw();
+	m_LinesClearedGUIComponent.Draw();
 }
 
 void Board::Update(float deltaTime) {	
@@ -170,6 +172,7 @@ void Board::Update(float deltaTime) {
 	this->m_FuturePiecesGUIComponent.Update();
 	m_SplashTextController.Update(deltaTime);
 	m_LevelGUIComponent.SetLevel(this->m_Level);
+	m_LinesClearedGUIComponent.SetValue(this->m_TotalLinesCleared);
 }
 
 int32_t Board::GetCellSize() const {

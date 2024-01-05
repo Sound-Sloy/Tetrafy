@@ -15,7 +15,7 @@ public:
 	void Draw();
 private:
 	Vec2<int32_t> m_Pos{0,0};
-	Vec2<int32_t> m_Size{196, 320};
+	Vec2<int32_t> m_Size{196, 287};
 	int32_t m_SpritesPosY = 0;
 	const int32_t CPadding = 10;
 	std::deque<Tetromino>& m_Tetrominos;

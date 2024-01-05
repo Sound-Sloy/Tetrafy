@@ -14,6 +14,7 @@
 #include "Score.h"
 #include "LevelGUIComponent.h"
 #include "HeldTetrominoGUIComponent.h"
+#include "LinesClearedGUIComponent.h"
 #include "Switch.h"
 #include "DeathScreen.h"
 
@@ -58,6 +59,7 @@ private:
 	SplashTextController m_SplashTextController;
 	LevelGUIComponent m_LevelGUIComponent;
 	HeldTetrominoGUIComponent m_HeldTetrominoGUIComponent;
+	LinesClearedGUIComponent m_LinesClearedGUIComponent;
 
 	std::mt19937 RNG{ static_cast<std::mt19937::result_type>(
 		std::chrono::steady_clock::now().time_since_epoch().count()
