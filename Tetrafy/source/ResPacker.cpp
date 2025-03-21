@@ -114,7 +114,7 @@ Sound ResPacker::Loader::LoadAsSound(std::string ID, std::string ext)
 		ext = GetExtension(ID);
 	}
 	Wave wave = LoadWaveFromMemory(ext.c_str(), m_Structure.Objects[index].Data, m_Structure.Objects[index].DataSize);
-	if (!IsWaveReady(wave)) {
+	if (!IsWaveValid(wave)) {
 		TraceLog(LOG_FATAL, (std::string("Failed to load wave while loading sound (") + ID + std::string(")")).c_str());
 		return emptySound;
 	}
@@ -158,7 +158,7 @@ Texture2D ResPacker::Loader::LoadAsTexture2D(std::string ID, std::string ext)
 
 	Image image = LoadImageFromMemory(ext.c_str(), m_Structure.Objects[index].Data, m_Structure.Objects[index].DataSize);
 
-	if (!IsImageReady(image)) {
+	if (!IsImageValid(image)) {
 		TraceLog(LOG_FATAL, (std::string("Failed to load image while loading texture (") + ID + std::string(")")).c_str());
 		return emptyTexture;
 	}

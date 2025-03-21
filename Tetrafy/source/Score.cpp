@@ -71,12 +71,9 @@ void SplashText::Update(float deltaTime)
 	if (!m_bEnabled) {
 		return;
 	}
-	if (m_TimeSinceSpawn > m_LifeTime) {
-		return;
-	}
 	m_TimeSinceSpawn += deltaTime;
 	//this->m_Color.a *= (this->m_LifeTime - this->m_TimeSinceSpawn) / this->m_LifeTime;
-	if (m_TimeSinceSpawn == m_LifeTime) {
+	if (m_TimeSinceSpawn >= m_LifeTime) {
 		m_bEnabled = false;
 	}
 }

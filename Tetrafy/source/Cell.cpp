@@ -34,7 +34,7 @@ void Cell::Draw() {
 
 	if (m_bDisolve) {
 		m_DisolveSprite.Draw(m_BoardPos.GetX() + m_GridPos.GetX() * (m_Size + m_Padding),
-			m_BoardPos.GetY() + m_GridPos.GetY() * (m_Size + m_Padding), LIGHTGRAY);
+			m_BoardPos.GetY() + m_GridPos.GetY() * (m_Size + m_Padding), Color{ (uint8_t)(m_Color.r * 0.8),(uint8_t)(m_Color.g * 0.8), (uint8_t)(m_Color.b * 0.8), m_Color.a });
 		return;
 	}
 

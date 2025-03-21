@@ -52,7 +52,7 @@ void Button::Update() {
 
 void Button::Draw() {
 
-	DrawRectangleRoundedLines({ (float)m_Pos.GetX(), (float)m_Pos.GetY(), (float)m_Size.GetX(), (float)m_Size.GetY() }, m_Properties.BorderRoundness, m_Properties.BorderSegments, m_Properties.BorderSize, m_Properties.BorderColor);
+	DrawRectangleRoundedLinesEx({ (float)m_Pos.GetX(), (float)m_Pos.GetY(), (float)m_Size.GetX(), (float)m_Size.GetY() }, m_Properties.BorderRoundness, m_Properties.BorderSegments, m_Properties.BorderSize, m_Properties.BorderColor);
 	//DrawRectangleRounded(, m_Properties.BorderRoundness, m_Properties.BorderSegments, m_Properties.ForegroundColor);
 	DrawRectangleRounded({ (float)m_Pos.GetX() + m_Properties.BorderSize, (float)m_Pos.GetY() + m_Properties.BorderSize, (float)m_Size.GetX() - 2 * m_Properties.BorderSize, (float)m_Size.GetY() - 2 * m_Properties.BorderSize }, m_Properties.BorderRoundness, m_Properties.BorderSegments, m_Properties.BackgroundColor);
 	
@@ -91,10 +91,10 @@ bool Button::IsClicked() {
 TextureButton::TextureButton(Vec2<int32_t> pos, Vec2<float> origin, Vec2<int32_t> size, std::string text, TextureButtonProperties properties)
 	: m_Pos(pos), m_Size(size), m_Text(text), m_Properties(properties)
 {
-	assert(IsTextureReady(properties.ActiveTexture));
-	assert(IsTextureReady(properties.InactiveTexture));
-	assert(IsTextureReady(properties.ClickedTexture));
-	assert(IsTextureReady(properties.HoveredTexture));
+	assert(IsTextureValid(properties.ActiveTexture));
+	assert(IsTextureValid(properties.InactiveTexture));
+	assert(IsTextureValid(properties.ClickedTexture));
+	assert(IsTextureValid(properties.HoveredTexture));
 
 	origin *= Vec2<float>{(float)m_Properties.ActiveTexture.width, (float)m_Properties.ActiveTexture.height};
 	m_Origin = Vec2<int32_t>{ (int32_t)origin.GetX(), (int32_t)origin.GetY() };

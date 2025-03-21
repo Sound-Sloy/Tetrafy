@@ -3,7 +3,7 @@
 Switch::Switch(Vec2<int32_t> pos, SwitchProperties properties) :
 	m_Pos(pos), m_Properties(properties), m_State(properties.StartingState)
 {
-	if (!IsTextureReady(m_Properties.InactiveTexture) or !IsTextureReady(m_Properties.OffTexture) or !IsTextureReady(m_Properties.OnTexture)) {
+	if (!IsTextureValid(m_Properties.InactiveTexture) or !IsTextureValid(m_Properties.OffTexture) or !IsTextureValid(m_Properties.OnTexture)) {
 		TraceLog(LOG_FATAL, "Trying to initialize Switch when textures are not ready");
 		return;
 	}

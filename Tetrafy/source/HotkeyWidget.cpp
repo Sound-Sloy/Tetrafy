@@ -8,11 +8,11 @@ Hotkey::Hotkey(Vec2<int32_t> pos, Vec2<int32_t> size, Vec2<float> origin, Keyboa
 	}
 
 	if (/*properties.TextureMode*/ true) {
-		assert(IsTextureReady(properties.ActiveTexture));
-		assert(IsTextureReady(properties.InactiveTexture));
-		assert(IsTextureReady(properties.ClickedTexture));
-		assert(IsTextureReady(properties.HoveredTexture));
-		assert(IsTextureReady(properties.FocusedTexture));
+		assert(IsTextureValid(properties.ActiveTexture));
+		assert(IsTextureValid(properties.InactiveTexture));
+		assert(IsTextureValid(properties.ClickedTexture));
+		assert(IsTextureValid(properties.HoveredTexture));
+		assert(IsTextureValid(properties.FocusedTexture));
 
 		if (size == Vec2{ 0,0 }) {
 			size = { properties.ActiveTexture.width, properties.ActiveTexture.height };

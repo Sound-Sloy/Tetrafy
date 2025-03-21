@@ -212,6 +212,7 @@ void Tetromino::Update(float deltaTime, int32_t level) {
 	// Soft drop
 	float speed = this->m_DownSpeed + this->m_DownSpeed * .3f * (level - 1);
 	bool softdropping = false;
+	//printf("%i\n", Globals::Animations::CellDisolveAnimation.FPS);
 	if (Globals::Options.SoftDropToggle and IsKeyDown(Globals::Options.KeySoftDrop)) {
 		speed = speed * m_SoftDropMultiplier;
 		softdropping = true;

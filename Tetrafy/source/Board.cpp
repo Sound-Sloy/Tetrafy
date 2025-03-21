@@ -157,7 +157,7 @@ void Board::Update(float deltaTime) {
 		if (!this->m_HeldTetromino.Exists()) {
 			this->m_HeldTetromino = { this->m_Tetrominos.front() };
 			this->m_Tetrominos.pop_front();
-			this->m_Tetrominos.push_back(Tetromino(this->m_HeldTetromino.GetShape(), this->m_GridSize, this->m_CellSize, m_Cells));
+			this->m_Tetrominos.emplace_back(NextShape(), this->m_GridSize, this->m_CellSize, m_Cells);
 
 		}
 	}
@@ -171,6 +171,9 @@ void Board::Update(float deltaTime) {
 
 	this->m_FuturePiecesGUIComponent.Update();
 	m_SplashTextController.Update(deltaTime);
+	if(this->m_Level != m_LevelGUIComponent.GetLevel()) {
+		Globals::Animations::CellDisolveAnimation.FPS = floor(1.f * Globals::Animations::CellDisolveAnimation.FPS + Globals::Animations::CellDisolveAnimation.FPS * 0.3 * (m_Level - 1));
+	}
 	m_LevelGUIComponent.SetLevel(this->m_Level);
 	m_LinesClearedGUIComponent.SetValue(this->m_TotalLinesCleared);
 }
