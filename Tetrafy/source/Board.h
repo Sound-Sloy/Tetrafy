@@ -51,7 +51,7 @@ private:
 	int32_t m_CellPadding;
 	bool m_bGameOver = false;
 	int32_t m_TotalLinesCleared = 0;
-	int32_t m_Level = 2;
+	int32_t m_Level = 1;
 	int32_t m_ComboCount = 0;
 
 	FuturePiecesGUIComponent m_FuturePiecesGUIComponent;
