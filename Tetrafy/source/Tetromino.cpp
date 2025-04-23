@@ -248,7 +248,6 @@ void Tetromino::Update(float deltaTime, int32_t level) {
 		this->m_ScoreAccumulated++;
 	}
 	this->m_GhostPos = GetLandingPos();
-
 }
 
 

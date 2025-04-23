@@ -6,6 +6,7 @@
 #include "Button.h"
 #include "Switch.h"
 #include "Slider.h"
+#include "Counter.h"
 #include "Vec2.h"
 #include "Utils.h"
 #include "Text.h"
@@ -22,21 +23,24 @@ private:
 	ScreensE m_ScrBefOptions = ScreensE::None;
 
 	Text m_Title;
-	Switch* m_MusicSwitch;
-	Switch* m_SFXSwitch;
-	Switch* m_SoftDropSwitch;
-	Switch* m_HardDropSwitch;
-	Switch* m_LandingPreviewSwitch;
+	std::unique_ptr<Switch> m_MusicSwitch = nullptr;
+	std::unique_ptr<Switch> m_SFXSwitch = nullptr;
+	std::unique_ptr<Switch> m_SoftDropSwitch = nullptr;
+	std::unique_ptr<Switch> m_HardDropSwitch = nullptr;
+	std::unique_ptr<Switch> m_LandingPreviewSwitch = nullptr;
 	Button m_BackButton;
 	Button m_ControlsButton;
-	Slider<float>* m_MusicVolumeSlider;
-	Slider<float>* m_SFXVolumeSlider;
+	std::unique_ptr<Counter> m_GUIScaleCounter = nullptr;
+	//Slider<float>* m_MusicVolumeSlider;
+	//Slider<float>* m_SFXVolumeSlider;
+
 
 	int32_t m_Padding = 30;
 
-	Vec2<int32_t> m_MusicSwitchTextPos = { (728 - 229 - m_Padding - 48)/2,250 };
+	Vec2<int32_t> m_MusicSwitchTextPos = { (728 - 229 - m_Padding - 48)/2,200 };
 	Vec2<int32_t> m_SFXSwitchTextPos = { 0,0 };   
 	Vec2<int32_t> m_SoftDropSwitchTextPos = { 0,0 };
 	Vec2<int32_t> m_HardDropSwitchTextPos = { 0,0 };
 	Vec2<int32_t> m_LandingPreviewSwitchTextPos = { 0,0 };
+	Vec2<int32_t> m_GUIScaleCounterTextPos = { 0,0 };
 };

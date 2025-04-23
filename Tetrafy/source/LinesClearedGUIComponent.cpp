@@ -3,8 +3,8 @@
 LinesClearedGUIComponent::LinesClearedGUIComponent(Vec2<int32_t> pos, Vec2<int32_t> size)
 	: m_Pos(pos), m_Size(size)
 {
-	m_TitleText = Text("Lines", {pos.GetX() + size.GetX() / 2, pos.GetY() + CPadding}, {.5f, 0.f}, Globals::TetrisFont, 28.f);
-	m_ValueText = Text("0", { pos.GetX() + size.GetX() / 2, pos.GetY() + 28 + 2 * CPadding }, { .5f, 0.f }, Globals::TetrisFontMedium, 20.f, 1.f, 0.f, LIGHTGRAY);
+	m_TitleText = Text("Lines", {pos.GetX() + size.GetX() / 2, pos.GetY() + CPadding}, {.5f, 0.f}, Globals::TetrisFont, 28.f * Globals::Options.GUIScale);
+	m_ValueText = Text("0", { pos.GetX() + size.GetX() / 2, pos.GetY() + 28 + 2 * CPadding }, { .5f, 0.f }, Globals::TetrisFontMedium, 20.f * Globals::Options.GUIScale, 1.f, 0.f, LIGHTGRAY);
 }
 
 void LinesClearedGUIComponent::Draw()

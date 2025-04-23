@@ -143,6 +143,7 @@
     <ClCompile Include="source\Button.cpp" />
     <ClCompile Include="source\Cell.cpp" />
     <ClCompile Include="source\ControlsScreen.cpp" />
+    <ClCompile Include="source\Counter.cpp" />
     <ClCompile Include="source\DeathScreen.cpp" />
     <ClCompile Include="source\FuturePiecesGUIComponent.cpp" />
     <ClCompile Include="source\Game.cpp" />
@@ -173,6 +174,7 @@
     <ClInclude Include="source\Button.h" />
     <ClInclude Include="source\Cell.h" />
     <ClInclude Include="source\ControlsScreen.h" />
+    <ClInclude Include="source\Counter.h" />
     <ClInclude Include="source\DeathScreen.h" />
     <ClInclude Include="source\FuturePiecesGUIComponent.h" />
     <ClInclude Include="source\Game.h" />

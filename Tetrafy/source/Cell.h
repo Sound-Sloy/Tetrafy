@@ -32,7 +32,6 @@ public:
 	void RestartDisolve();
 	bool CanBeRemoved() const;
 	bool IsDisolving() const;
-
 private:
 	Color m_Color;
 	Vec2<int32_t> m_GridPos;
@@ -43,8 +42,8 @@ private:
 	Color m_VirtualColor;
 	bool m_bIsVirtual = false; // whether this cell is used to render the teromino
 	Color m_GhostColor;
-	bool m_bGhost = false;
-	bool m_bBlinking = false;
+	bool m_bGhost = false; // landing preview
+	bool m_bBlinking = false; // before solidifying
 	bool m_bDisolve = false;
 
 	AnimatedSprite m_BlinkingSprite;

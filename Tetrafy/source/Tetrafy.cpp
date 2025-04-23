@@ -2,7 +2,7 @@
 
 int main()
 {
-    Game game(738, 800, "Tetrafy");
+    Game game(Globals::BaseWindowSizeX, Globals::BaseWindowSizeY, "Tetrafy");
     while (!game.GameShouldClose()) {
         game.Tick();
     }

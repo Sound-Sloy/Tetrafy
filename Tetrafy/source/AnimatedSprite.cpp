@@ -9,8 +9,8 @@ AnimatedSprite::AnimatedSprite(Animation& animation, float scale) :
 void AnimatedSprite::Draw(Vec2<int32_t> pos, Color color, float scale) {
 	int32_t lastFrame = m_CurrentFrame;
 	m_CurrentFrame = (int32_t)((GetTime() - m_SpawnTime) * m_Animation.FPS) % m_Animation.Rectangles.size();
-	
-	if (m_CurrentFrame == 0 and lastFrame > m_CurrentFrame) {
+
+	if (m_CurrentFrame == m_Animation.Rectangles.size() - 1 and lastFrame < m_CurrentFrame) {
 		m_RepeatCounter++;
 	}
 

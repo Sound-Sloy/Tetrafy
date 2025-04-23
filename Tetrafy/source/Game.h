@@ -25,6 +25,9 @@ public:
 	void LoadOptions();
 	void SaveOptions();
 
+	void LoadAssets();
+	void UnloadAssets();
+
 private:
 	void Update();
 	void Draw();

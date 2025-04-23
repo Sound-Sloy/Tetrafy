@@ -13,5 +13,7 @@ namespace States {
 
 	namespace Flags {
 		inline bool ForceResetBoard = false;
+		inline bool ForceReconstructScreens = false;
+		inline bool ForceReloadAssets = false;
 	}
 }

@@ -1,5 +1,7 @@
 #include "ResPacker.h"
 
+#include "external/miniaudio.h"
+
 ResPacker::Loader::Loader(std::string filePath)
 {
 	assert(std::filesystem::is_regular_file(filePath));
@@ -29,6 +31,8 @@ ResPacker::Loader::Loader(std::string filePath)
 		m_File.seekg(obj.DataSize, m_File.cur);
 
 		m_Structure.Objects.push_back(obj);
+
+		
 
 		std::ostringstream oss;
 		for (uint32_t __ = 0; __ < obj.IDSize; ++__) {

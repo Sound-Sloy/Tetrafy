@@ -2,17 +2,17 @@
 
 ControlsScreen::ControlsScreen()
 {
-	m_Title = Text("Controls", { GetRenderWidth() / 2,125 }, { .5f,.5f }, Globals::TetrisFontBig, 72.f);
+	m_Title = Text("Controls", { GetRenderWidth() / 2,static_cast<int>(125 * Globals::Options.GUIScale) }, { .5f,.5f }, Globals::TetrisFontBig, 72.f * Globals::Options.GUIScale);
 	
-	int32_t widgetWidth = 300;
+	int32_t widgetWidth = 300 * Globals::Options.GUIScale;
 	
-	m_LeftText		= Text("Move Left", {GetRenderWidth() / 2 - widgetWidth / 2, 250}, {0.f, .5f}, Globals::TetrisFont, 28.f);
-	m_RightText		= Text("Move Right", {GetRenderWidth() / 2 - widgetWidth / 2, 300}, {0.f, .5f}, Globals::TetrisFont, 28.f);
-	m_RotateCWText	= Text("Rotate CW", {GetRenderWidth() / 2 - widgetWidth / 2, 350}, {0.f, .5f}, Globals::TetrisFont, 28.f);
-	m_RotateCCWText	= Text("Rotate CCW", {GetRenderWidth() / 2 - widgetWidth / 2, 400}, {0.f, .5f}, Globals::TetrisFont, 28.f);
-	m_SoftDropText	= Text("Soft Drop", {GetRenderWidth() / 2 - widgetWidth / 2, 450}, {0.f, .5f}, Globals::TetrisFont, 28.f);
-	m_HardDropText	= Text("Hard Drop", {GetRenderWidth() / 2 - widgetWidth / 2, 500}, {0.f, .5f}, Globals::TetrisFont, 28.f);
-	m_HoldText		= Text("Hold", {GetRenderWidth() / 2 - widgetWidth / 2, 550}, {0.f, .5f}, Globals::TetrisFont, 28.f);
+	m_LeftText		= Text("Move Left", {GetRenderWidth() / 2 - widgetWidth / 2, static_cast<int>(250 * Globals::Options.GUIScale) }, {0.f, .5f}, Globals::TetrisFont, 28.f * Globals::Options.GUIScale);
+	m_RightText		= Text("Move Right", {GetRenderWidth() / 2 - widgetWidth / 2, static_cast<int>(300 * Globals::Options.GUIScale) }, {0.f, .5f}, Globals::TetrisFont, 28.f * Globals::Options.GUIScale);
+	m_RotateCWText	= Text("Rotate CW", {GetRenderWidth() / 2 - widgetWidth / 2, static_cast<int>(350 * Globals::Options.GUIScale) }, {0.f, .5f}, Globals::TetrisFont, 28.f * Globals::Options.GUIScale);
+	m_RotateCCWText	= Text("Rotate CCW", {GetRenderWidth() / 2 - widgetWidth / 2, static_cast<int>(400 * Globals::Options.GUIScale) }, {0.f, .5f}, Globals::TetrisFont, 28.f * Globals::Options.GUIScale);
+	m_SoftDropText	= Text("Soft Drop", {GetRenderWidth() / 2 - widgetWidth / 2, static_cast<int>(450 * Globals::Options.GUIScale) }, {0.f, .5f}, Globals::TetrisFont, 28.f * Globals::Options.GUIScale);
+	m_HardDropText	= Text("Hard Drop", {GetRenderWidth() / 2 - widgetWidth / 2, static_cast<int>(500 * Globals::Options.GUIScale) }, {0.f, .5f}, Globals::TetrisFont, 28.f * Globals::Options.GUIScale);
+	m_HoldText		= Text("Hold", {GetRenderWidth() / 2 - widgetWidth / 2, static_cast<int>(550 * Globals::Options.GUIScale) }, {0.f, .5f}, Globals::TetrisFont, 28.f * Globals::Options.GUIScale);
 
 	HotkeyProperties hotkeyProperties {
 		.ActiveTexture = Globals::Textures::HotkeyActive,
@@ -21,17 +21,17 @@ ControlsScreen::ControlsScreen()
 		.ClickedTexture = Globals::Textures::HotkeyClicked,
 		.FocusedTexture = Globals::Textures::HotkeyFocus,
 		.Font = &Globals::TetrisFontMedium,
-		.FontSize = 20.f,
+		.FontSize = 20.f * Globals::Options.GUIScale,
 		.FontSpacing = 1.f
 	};
 
-	m_LeftHotkey		= std::make_unique<Hotkey>(Vec2{ GetRenderWidth() / 2 + widgetWidth / 2, 250 }, Vec2{ 0,0 }, Vec2{ 1.f,.5f }, &Globals::Options.KeyLeft, hotkeyProperties);
-	m_RightHotkey		= std::make_unique<Hotkey>(Vec2{ GetRenderWidth() / 2 + widgetWidth / 2, 300 }, Vec2{ 0,0 }, Vec2{ 1.f,.5f }, &Globals::Options.KeyRight, hotkeyProperties);
-	m_RotCWHotkey		= std::make_unique<Hotkey>(Vec2{ GetRenderWidth() / 2 + widgetWidth / 2, 350 }, Vec2{ 0,0 }, Vec2{ 1.f,.5f }, &Globals::Options.KeyRotateCW, hotkeyProperties);
-	m_RotCCWHotkey		= std::make_unique<Hotkey>(Vec2{ GetRenderWidth() / 2 + widgetWidth / 2, 400 }, Vec2{ 0,0 }, Vec2{ 1.f,.5f }, &Globals::Options.KeyRotateCCW, hotkeyProperties);
-	m_SoftDropHotkey	= std::make_unique<Hotkey>(Vec2{ GetRenderWidth() / 2 + widgetWidth / 2, 450 }, Vec2{ 0,0 }, Vec2{ 1.f,.5f }, &Globals::Options.KeySoftDrop, hotkeyProperties);
-	m_HardDropHotkey	= std::make_unique<Hotkey>(Vec2{ GetRenderWidth() / 2 + widgetWidth / 2, 500 }, Vec2{ 0,0 }, Vec2{ 1.f,.5f }, &Globals::Options.KeyHardDrop, hotkeyProperties);
-	m_HoldHotkey		= std::make_unique<Hotkey>(Vec2{ GetRenderWidth() / 2 + widgetWidth / 2, 550 }, Vec2{ 0,0 }, Vec2{ 1.f,.5f }, &Globals::Options.KeyHold, hotkeyProperties);
+	m_LeftHotkey		= std::make_unique<Hotkey>(Vec2{ GetRenderWidth() / 2 + widgetWidth / 2, static_cast<int32_t>(250 * Globals::Options.GUIScale) }, Vec2{ 0,0 }, Vec2{ 1.f,.5f }, &Globals::Options.KeyLeft, hotkeyProperties);
+	m_RightHotkey		= std::make_unique<Hotkey>(Vec2{ GetRenderWidth() / 2 + widgetWidth / 2, static_cast<int32_t>(300 * Globals::Options.GUIScale) }, Vec2{ 0,0 }, Vec2{ 1.f,.5f }, &Globals::Options.KeyRight, hotkeyProperties);
+	m_RotCWHotkey		= std::make_unique<Hotkey>(Vec2{ GetRenderWidth() / 2 + widgetWidth / 2, static_cast<int32_t>(350 * Globals::Options.GUIScale) }, Vec2{ 0,0 }, Vec2{ 1.f,.5f }, &Globals::Options.KeyRotateCW, hotkeyProperties);
+	m_RotCCWHotkey		= std::make_unique<Hotkey>(Vec2{ GetRenderWidth() / 2 + widgetWidth / 2, static_cast<int32_t>(400 * Globals::Options.GUIScale) }, Vec2{ 0,0 }, Vec2{ 1.f,.5f }, &Globals::Options.KeyRotateCCW, hotkeyProperties);
+	m_SoftDropHotkey	= std::make_unique<Hotkey>(Vec2{ GetRenderWidth() / 2 + widgetWidth / 2, static_cast<int32_t>(450 * Globals::Options.GUIScale) }, Vec2{ 0,0 }, Vec2{ 1.f,.5f }, &Globals::Options.KeySoftDrop, hotkeyProperties);
+	m_HardDropHotkey	= std::make_unique<Hotkey>(Vec2{ GetRenderWidth() / 2 + widgetWidth / 2, static_cast<int32_t>(500 * Globals::Options.GUIScale) }, Vec2{ 0,0 }, Vec2{ 1.f,.5f }, &Globals::Options.KeyHardDrop, hotkeyProperties);
+	m_HoldHotkey		= std::make_unique<Hotkey>(Vec2{ GetRenderWidth() / 2 + widgetWidth / 2, static_cast<int32_t>(550 * Globals::Options.GUIScale) }, Vec2{ 0,0 }, Vec2{ 1.f,.5f }, &Globals::Options.KeyHold, hotkeyProperties);
 
 	m_LeftHotkey->OnHover		= []() {Globals::SoundManagerInstance->PlaySoundNowUnique(Globals::Sounds::HoverSound); };
 	m_RightHotkey->OnHover		= []() {Globals::SoundManagerInstance->PlaySoundNowUnique(Globals::Sounds::HoverSound); };
@@ -52,10 +52,10 @@ ControlsScreen::ControlsScreen()
 	ButtonProperties buttonProperties = {
 		.TextAlignment = ButtonTextAlignment::Center,
 		.Font = &Globals::TetrisFont,
-		.FontSize = 28.f,
+		.FontSize = 28.f * Globals::Options.GUIScale,
 		.FontSpacing = 1.f
 	};
-	m_BackButton = Button({ {GetRenderWidth() / 2 - 200 / 2, 650}, {200,50}, "Back", buttonProperties });
+	m_BackButton = Button({ {static_cast<int>(GetRenderWidth() / 2 - 200 * Globals::Options.GUIScale / 2), static_cast<int>(650 * Globals::Options.GUIScale)}, {static_cast<int>(200 * Globals::Options.GUIScale),static_cast<int>(50 * Globals::Options.GUIScale)}, "Back", buttonProperties });
 	m_BackButton.OnClick = []() {
 		States::ChangeScreen(States::LastScreen);
 		Globals::SoundManagerInstance->PlaySoundNowUnique(Globals::Sounds::ClickSound);

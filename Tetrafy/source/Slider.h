@@ -50,7 +50,7 @@ public:
 	}
 
 	void Update() {
-		if (!IsTextureReady(m_Properties.BaseTexture) or !IsTextureReady(m_Properties.HighlightTexture) or !IsTextureReady(m_Properties.HandleTexture)) {
+		if (!IsTextureValid(m_Properties.BaseTexture) or !IsTextureValid(m_Properties.HighlightTexture) or !IsTextureValid(m_Properties.HandleTexture)) {
 			TraceLog(LOG_FATAL, "Invalid Slider Texture. Skipping Update call");
 			return;
 		}

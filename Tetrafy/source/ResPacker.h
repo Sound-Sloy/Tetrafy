@@ -2,7 +2,7 @@
 #include <iostream>
 #include <filesystem>
 #include <fstream>
-#include <raylib.h> // required only for clas Loader
+#include <raylib.h> // required only for class Loader
 #include <string>
 #include <vector>
 #include <unordered_map>
@@ -63,8 +63,6 @@ namespace ResPacker {
 		Music LoadAsMusicStream(std::string ID, std::string ext = "");
 		Texture2D LoadAsTexture2D(std::string ID, std::string ext = "");
 		Font LoadAsFont(std::string ID, std::string ext, int32_t fontSize, int32_t* codepoints = nullptr, int32_t cpCount = 512);
-
-
 
 	private:
 		FileStructure m_Structure;

@@ -1,8 +1,10 @@
 #include "ScreenManager.h"
 
+#include "external/miniaudio.h"
+
 ScreenManager::ScreenManager()
 {
-	m_Board = std::make_unique<Board>(Vec2{ 100,50 }, Vec2{10,20});
+	m_Board = std::make_unique<Board>(Vec2{ (int32_t)(100 * Globals::Options.GUIScale), (int32_t)(Globals::Options.GUIScale * 50) }, Vec2{10,20}, 32 * Globals::Options.GUIScale);
 	PauseScreenInstance = &m_PauseScreen;
 	if (!PauseScreenInstance) {
 		TraceLog(LOG_FATAL, "PauseScreenInstance == nullptr");
@@ -30,9 +32,22 @@ void ScreenManager::Update(float deltaTime) {
 	}
 
 	if (m_PauseScreen.FlagShouldRestartBoard or States::Flags::ForceResetBoard) {
-		m_Board = std::make_unique<Board>(Vec2{ 100,50 }, Vec2{ 10,20 });
+		m_Board = std::make_unique<Board>(Vec2{ static_cast<int32_t>(100 * Globals::Options.GUIScale), static_cast<int32_t>(Globals::Options.GUIScale * 50) }, Vec2{ 10,20 }, 32 * Globals::Options.GUIScale);
 		m_PauseScreen.FlagShouldRestartBoard = false;
 		States::Flags::ForceResetBoard = false;
+	}
+
+	if(States::Flags::ForceReconstructScreens) {
+		States::Flags::ForceReconstructScreens = false;
+		SetWindowSize(Globals::BaseWindowSizeX * Globals::Options.GUIScale, Globals::BaseWindowSizeY * Globals::Options.GUIScale);
+		m_Board = std::make_unique<Board>(Vec2{ static_cast<int32_t>(100 * Globals::Options.GUIScale), static_cast<int32_t>(Globals::Options.GUIScale * 50) }, Vec2{ 10,20 }, 32 * Globals::Options.GUIScale);
+		m_ControlsScreen = ControlsScreen();
+		delete m_MainScreen;
+		m_MainScreen = new MainScreen();
+		m_PauseScreen = PauseScreen();
+		PauseScreenInstance = &m_PauseScreen;
+		delete m_OptionsScreen;
+		m_OptionsScreen = new OptionsScreen();
 	}
 
 	switch (m_Screen)
@@ -91,5 +106,5 @@ void ScreenManager::Draw() {
 }
 
 ScreenManager* ScreenManager::GetInstance() const {
-	return (ScreenManager*)this;
+	return const_cast<ScreenManager*>(this);
 }
