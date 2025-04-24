@@ -365,5 +365,6 @@ FodyWeavers.xsd
 
 
 temp/
-assets/
+assets/*
 Tetrafy/assets/
+Tetrafy/settings.json
