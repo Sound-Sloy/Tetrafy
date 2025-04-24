@@ -3,7 +3,7 @@
 OptionsScreen::OptionsScreen()
 {
 	m_Padding *= Globals::Options.GUIScale;
-	m_Title = Text("Values", { GetRenderWidth() / 2,static_cast<int>(125 * Globals::Options.GUIScale) }, { .5f,.5f }, Globals::TetrisFontBig, 72.f * Globals::Options.GUIScale);
+	m_Title = Text("Options", { GetRenderWidth() / 2,static_cast<int>(125 * Globals::Options.GUIScale) }, { .5f,.5f }, Globals::TetrisFontBig, 72.f * Globals::Options.GUIScale);
 
 	m_MusicSwitchTextPos.SetX(m_MusicSwitchTextPos.GetX() * Globals::Options.GUIScale);
 	m_MusicSwitchTextPos.SetY(m_MusicSwitchTextPos.GetY() * Globals::Options.GUIScale);

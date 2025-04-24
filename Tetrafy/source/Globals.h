@@ -14,7 +14,7 @@ namespace Globals {
 	inline Font TetrisFontBig; 
 	inline Font TetrisFontMedium; 
 	inline Keyboard KeyboardManager;
-	inline SoundManager* SoundManagerInstance;
+	inline std::shared_ptr<SoundManager> SoundManagerInstance;
 
 	inline int32_t BaseWindowSizeX = 738;
 	inline int32_t BaseWindowSizeY = 800;

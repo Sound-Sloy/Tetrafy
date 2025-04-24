@@ -32,6 +32,8 @@ void SoundManager::Update() {
 	if (m_Options.MusicToggle) {
 		SetMusicVolume(m_MusicStream, m_Options.MusicVolume);
 		UpdateMusicStream(m_MusicStream);
-		PlayMusicStream(m_MusicStream);
+		if(!IsMusicStreamPlaying(m_MusicStream)) {
+			PlayMusicStream(m_MusicStream);
+		}
 	}
 }

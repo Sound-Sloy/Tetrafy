@@ -3,7 +3,7 @@
 Game::Game(int32_t width, int32_t height, std::string windowTitle)
 {
 	//{
-		// Info: Code to create an asset file
+	//	// Info: Code to create an asset file
 	//	ResPacker::Dumper dmp("./assets.sndrpkg");
 	//	for (auto entry : std::filesystem::directory_iterator("./assets")) {
 	//		if(!entry.is_regular_file()) {
@@ -35,7 +35,9 @@ Game::Game(int32_t width, int32_t height, std::string windowTitle)
 	Globals::Fonts::FontDefault = GetFontDefault();
 	Globals::KeyboardManager = Keyboard();
 
-	Globals::SoundManagerInstance = new SoundManager(Globals::Options, Globals::Sounds::MainTheme);
+	// 
+	//Globals::SoundManagerInstance = new SoundManager(Globals::Options, Globals::Sounds::MainTheme);
+	//Globals::SoundManagerInstance = std::make_shared<SoundManager>(Globals::Options, Globals::Sounds::MainTheme);
 	Globals::KeyboardManager = Keyboard();
 
 	{
@@ -145,6 +147,8 @@ void Game::LoadAssets()
 	Globals::Textures::HotkeyInactive = Globals::Textures::HotkeyActive;
 	Globals::Textures::HotkeyHovered = Globals::Textures::HotkeyActive;
 	Globals::Textures::HotkeyClicked = Globals::Textures::HotkeyActive;
+
+	Globals::SoundManagerInstance = std::make_shared<SoundManager>(Globals::Options, Globals::Sounds::MainTheme);
 }
 void Game::UnloadAssets()
 {
@@ -180,12 +184,10 @@ void Game::Update()
 	float deltaTime = GetFrameTime();
 	Globals::SoundManagerInstance->Update();
 	m_ScreenManager->Update(deltaTime);
-	//this->m_Board.Update(deltaTime);
 }
 
 void Game::Draw()
 {
 	ClearBackground(Globals::Colors::BackgroundColor);
 	m_ScreenManager->Draw();
-	//m_Board.Draw();
 }
