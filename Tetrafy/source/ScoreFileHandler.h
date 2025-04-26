@@ -30,6 +30,11 @@ public:
 			return sum ^ 0x5EEB00B5DEADBEEF;
 		}
 
+		constexpr bool operator== (const PlayerScore& rhs) const 
+		{
+			return this->TimeSpent == rhs.TimeSpent and this->BytePosInFile == rhs.BytePosInFile and this->Checksum == rhs.Checksum and this->Flags == rhs.Flags and this->Score == rhs.Score and this->Timestamp == rhs.Timestamp and this->m_bTampered == rhs.m_bTampered;
+		}
+
 		void Dump(std::fstream& file);
 		bool Load(std::fstream& file);
 

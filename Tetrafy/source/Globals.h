@@ -66,6 +66,4 @@ namespace Globals {
 	}
 
 	inline OptionsS Options;
-
-	inline uint32_t HighScore = 0;
 }

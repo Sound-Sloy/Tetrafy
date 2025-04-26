@@ -3,6 +3,7 @@
 #include <raylib.h>
 #include <string>
 #include <random>
+#include <algorithm>
 
 #include "Vec2.h"
 #include "Button.h"
@@ -12,25 +13,25 @@
 
 class DeathScreen {
 public:
-	DeathScreen(uint32_t currentScore = 0, uint32_t highScore = -1, uint32_t level = 0);
+	DeathScreen(uint32_t currentScore = 0, uint32_t level = 0);
 	~DeathScreen() = default;
 
 	void Update();
 	void Draw();
 
 private:
-	const uint32_t m_CurrentScore = 0;
-	const uint32_t m_HighScore = -1;
-	
+	const uint64_t c_CurrentScore = 0;
+	static constexpr int32_t C_TABLE_COL_SPACING = 15;
+	static constexpr int32_t C_TABLE_ROW_SPACING = 5;
+
 	std::unique_ptr<Button> m_RetryButton;
 	std::unique_ptr<Button> m_ExitButton;
 	std::unique_ptr<Button> m_MainMenuButton;
+	std::vector<Text> m_Texts;
 	Text m_TitleText;
 	Text m_GameOverText;
-	Text m_ScoreText;
-	Text m_ScoreValueText;
-	Text m_BestText;
-	Text m_BestValueText;
-	Text m_LevelText;
-	Text m_LevelValueText;
+
+
+	static std::string FormatTimeSpent(uint32_t timeSpentSeconds);
+	static std::string FormatTimestamp(std::time_t timestamp);
 };

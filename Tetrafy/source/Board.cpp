@@ -31,7 +31,9 @@ Board::Board(Vec2<int32_t> pos, Vec2<int32_t> gridSize, int32_t cellSize, int32_
 
 void Board::Draw() {
 	if (IsOver()) {
-		m_DeathScreen->Draw();
+		if(m_DeathScreen) {
+			m_DeathScreen->Draw();
+		}
 		return;
 	}
 	if (m_Tetrominos.empty()) {
@@ -61,6 +63,9 @@ void Board::Update(float deltaTime) {
 			playerScore.Timestamp = std::time(nullptr);
 			Globals::GScoreFileHandlerInstance->AddScoreEntry(playerScore);
 		}
+		if(!m_DeathScreen) {
+			m_DeathScreen = std::make_unique<DeathScreen>(m_ScoreGUIComponent.GetScore(), m_LevelGUIComponent.GetLevel());
+		}
 		m_DeathScreen->Update();
 		return;
 	}
@@ -70,7 +75,7 @@ void Board::Update(float deltaTime) {
 	ResetVirtualCells();
 	ResetGhostCells();
 	ResetBlinkingCells();
-
+	
 	while (this->m_Tetrominos.size() < 4) {
 		if (this->m_HeldTetromino.Exists()) {
 			this->m_Tetrominos.emplace_front(this->m_HeldTetromino.GetShape(), this->m_GridSize, this->m_CellSize, m_Cells);
@@ -249,10 +254,10 @@ Vec2<int32_t> Board::GetGridSize() const {
 
 void Board::SetOver(bool over) {
 	this->m_bGameOver = over;
-	if (over) {
-		m_DeathScreen = std::make_unique<DeathScreen>((uint32_t)m_ScoreGUIComponent.GetScore(), Globals::HighScore, (uint32_t)m_LevelGUIComponent.GetLevel());
-		Globals::HighScore = std::max((uint32_t)m_ScoreGUIComponent.GetScore(), Globals::HighScore);
-	}
+	//if (over) {
+	//	m_DeathScreen = std::make_unique<DeathScreen>(static_cast<uint32_t>(m_ScoreGUIComponent.GetScore()), static_cast<uint32_t>(m_LevelGUIComponent.GetLevel()));
+	//	//Globals::HighScore = std::max(static_cast<uint32_t>(m_ScoreGUIComponent.GetScore()), Globals::HighScore);
+	//}
 }
 
 bool Board::IsOver() const {

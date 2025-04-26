@@ -14,6 +14,7 @@ void ScoreFileHandler::PlayerScore::Dump(std::fstream& file)
 	file.write((char*)&encryptedScore, sizeof(encryptedScore));
 
 	file.write((char*)&Flags, sizeof(Flags));
+	ComputeChecksum();
 	file.write((char*)&Checksum, sizeof(Checksum));
 }
 
@@ -21,9 +22,11 @@ bool ScoreFileHandler::PlayerScore::Load(std::fstream& file)
 {
 	assert(file.is_open());
 
+	uint64_t curPos = static_cast<uint64_t>(file.tellp());
+
 	file.read((char*)&this->BytePosInFile,	sizeof(this->BytePosInFile));
 
-	if(this->BytePosInFile != static_cast<uint64_t>(file.tellp())) {
+	if(this->BytePosInFile != curPos) {
 		return false;
 	}
 
@@ -35,6 +38,8 @@ bool ScoreFileHandler::PlayerScore::Load(std::fstream& file)
 	uint64_t checksum = 0;
 
 	file.read((char*)&checksum,		sizeof(checksum));
+
+	ComputeChecksum();
 
 	if (this->Checksum != checksum) {
 		this->m_bTampered = true;
@@ -123,7 +128,6 @@ bool ScoreFileHandler::IsFileTampered() const
 
 void ScoreFileHandler::AddScoreEntry(ScoreFileHandler::PlayerScore score)
 {
-	score.ComputeChecksum();
 	m_ScoreFile.Scores.emplace_back(score);
 	m_ScoreFile.ObjectCount = m_ScoreFile.Scores.size();
 }
