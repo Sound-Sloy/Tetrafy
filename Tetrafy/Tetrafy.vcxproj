@@ -158,6 +158,7 @@
     <ClCompile Include="source\ResourceLoader.cpp" />
     <ClCompile Include="source\ResPacker.cpp" />
     <ClCompile Include="source\Score.cpp" />
+    <ClCompile Include="source\ScoreFileHandler.cpp" />
     <ClCompile Include="source\Screen.cpp" />
     <ClCompile Include="source\ScreenManager.cpp" />
     <ClCompile Include="source\Slider.cpp" />
@@ -193,6 +194,7 @@
     <ClInclude Include="source\ResourceLoader.h" />
     <ClInclude Include="source\ResPacker.h" />
     <ClInclude Include="source\Score.h" />
+    <ClInclude Include="source\ScoreFileHandler.h" />
     <ClInclude Include="source\Screen.h" />
     <ClInclude Include="source\ScreenManager.h" />
     <ClInclude Include="source\ScreensEnum.h" />

@@ -25,7 +25,7 @@ Board::Board(Vec2<int32_t> pos, Vec2<int32_t> gridSize, int32_t cellSize, int32_
 		}
 	}
 
-	PlayMusicStream(Globals::Sounds::MainTheme);
+	//PlayMusicStream(Globals::Sounds::MainTheme);
 
 }
 
@@ -52,9 +52,20 @@ void Board::Draw() {
 
 void Board::Update(float deltaTime) {	
 	if (IsOver()) {
+		if(!m_bSavedScore) {
+			m_bSavedScore = true;
+
+			ScoreFileHandler::PlayerScore playerScore;
+			playerScore.Score = m_ScoreGUIComponent.GetScore();
+			playerScore.TimeSpent = static_cast<uint32_t>(m_TimeSpentInGame);
+			playerScore.Timestamp = std::time(nullptr);
+			Globals::GScoreFileHandlerInstance->AddScoreEntry(playerScore);
+		}
 		m_DeathScreen->Update();
 		return;
 	}
+
+	m_TimeSpentInGame += deltaTime;
 
 	ResetVirtualCells();
 	ResetGhostCells();

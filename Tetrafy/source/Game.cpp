@@ -40,6 +40,10 @@ Game::Game(int32_t width, int32_t height, std::string windowTitle)
 	//Globals::SoundManagerInstance = std::make_shared<SoundManager>(Globals::Options, Globals::Sounds::MainTheme);
 	Globals::KeyboardManager = Keyboard();
 
+	Globals::GScoreFileHandlerInstance = std::make_unique<ScoreFileHandler>("./PlayerScores.bin");
+	Globals::GScoreFileHandlerInstance->Load();
+
+
 	{
 		LoadAssets();
 	}
@@ -56,6 +60,7 @@ Game::~Game() noexcept
 	CloseAudioDevice();
 	CloseWindow();
 	SaveOptions();
+	Globals::GScoreFileHandlerInstance->Save();
 }
 
 bool Game::GameShouldClose() const

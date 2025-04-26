@@ -70,6 +70,8 @@ OptionsScreen::OptionsScreen()
 	m_SoftDropSwitch->OnHover = [](Vec2<int32_t>) { Globals::SoundManagerInstance->PlaySoundNowUnique(Globals::Sounds::HoverSound); };
 	m_HardDropSwitch->OnHover = [](Vec2<int32_t>) { Globals::SoundManagerInstance->PlaySoundNowUnique(Globals::Sounds::HoverSound); };
 	m_LandingPreviewSwitch->OnHover = [](Vec2<int32_t>) { Globals::SoundManagerInstance->PlaySoundNowUnique(Globals::Sounds::HoverSound); };
+	m_GUIScaleCounter->OnHover = [](Vec2<int32_t>) { Globals::SoundManagerInstance->PlaySoundNowUnique(Globals::Sounds::HoverSound); };
+
 
 	m_MusicSwitch->OnChange = [this](SwitchStatesE state) {Globals::Options.MusicToggle = (bool)state;/* m_MusicVolumeSlider->SetActive((bool)state);*/ };
 	m_SFXSwitch->OnChange = [](SwitchStatesE state) {Globals::Options.SFXToggle = (bool)state; };
@@ -161,7 +163,7 @@ void OptionsScreen::Draw() {
 	DrawTextEx(Globals::TetrisFont, "Soft Drop", m_SoftDropSwitchTextPos, 28.f * Globals::Options.GUIScale, 1.f, WHITE);
 	DrawTextEx(Globals::TetrisFont, "Hard Drop", m_HardDropSwitchTextPos, 28.f * Globals::Options.GUIScale, 1.f, WHITE);
 	DrawTextEx(Globals::TetrisFont, "Landing Preview", m_LandingPreviewSwitchTextPos, 28.f * Globals::Options.GUIScale, 1.f, WHITE);
-	DrawTextEx(Globals::TetrisFont, "GUI Scale", m_GUIScaleCounterTextPos, 28.f * Globals::Options.GUIScale, 1.f, WHITE);
+	DrawTextEx(Globals::TetrisFont, "GUI Scale", m_GUIScaleCounterTextPos, 28.f * Globals::Options.GUIScale, 1.f, m_ScrBefOptions != ScreensE::Pause ? WHITE : DARKGRAY);
 
 
 	m_MusicSwitch->Draw();

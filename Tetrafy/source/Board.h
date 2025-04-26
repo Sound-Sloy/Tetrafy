@@ -54,6 +54,9 @@ private:
 	int32_t m_Level = 1;
 	int32_t m_ComboCount = 0;
 
+	double m_TimeSpentInGame = 0;
+	bool m_bSavedScore = false;
+
 	FuturePiecesGUIComponent m_FuturePiecesGUIComponent;
 	ScoreGUIComponent m_ScoreGUIComponent;
 	SplashTextController m_SplashTextController;

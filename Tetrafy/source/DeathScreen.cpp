@@ -3,36 +3,38 @@
 DeathScreen::DeathScreen(uint32_t currentScore, uint32_t highScore, uint32_t level)
 	: m_CurrentScore(currentScore), m_HighScore(highScore)
 {
-	m_GameOverText = Text("Game Over!", { GetRenderWidth() / 2, 75 }, {.5f, .5f}, Globals::TetrisFont, 28.f);
+	m_GameOverText = Text("Game Over!", { GetRenderWidth() / 2, static_cast<int>(75 * Globals::Options.GUIScale) }, {.5f, .5f}, Globals::TetrisFont, 28.f * Globals::Options.GUIScale);
 
 	if (currentScore > highScore) {
-		m_TitleText = Text("High Score!", { GetRenderWidth() / 2, 125 }, { .5f, .5f }, Globals::TetrisFontBig, 72.f);
+		m_TitleText = Text("High Score!", { GetRenderWidth() / 2, static_cast<int>(125 * Globals::Options.GUIScale) }, { .5f, .5f }, Globals::TetrisFontBig, 72.f * Globals::Options.GUIScale);
 	}
 	else {
 		std::vector<std::string> choices = { "Good Job!", "Congrats!", "Nice!", "You Rock!", "Great Round!", "Keep Going!" };
 		std::mt19937 RNG{ static_cast<std::mt19937::result_type>(std::chrono::steady_clock::now().time_since_epoch().count()) };
 		std::uniform_int_distribution<> choiceDistribution{ 0, (int32_t)choices.size() - 1 };
 
-		m_TitleText = Text(choices[choiceDistribution(RNG)], { GetRenderWidth() / 2, 125 }, { .5f, .5f }, Globals::TetrisFontBig, 72.f);
+		m_TitleText = Text(choices[choiceDistribution(RNG)], { GetRenderWidth() / 2, static_cast<int>(125 * Globals::Options.GUIScale) }, { .5f, .5f }, Globals::TetrisFontBig, 72.f * Globals::Options.GUIScale);
 	}
 
 
-	int32_t widgetWidth = 300;
+	int32_t widgetWidth = 300 * Globals::Options.GUIScale;
 
-	m_ScoreText = Text("Score", { GetRenderWidth() / 2 - widgetWidth / 2, 300 }, { 0.f, 0.f }, Globals::TetrisFont, 28.f);
-	m_ScoreValueText = Text(std::to_string(currentScore), {GetRenderWidth() / 2 + widgetWidth / 2, 300}, {1.f, 0.f}, Globals::TetrisFont, 28.f);
-	m_BestText = Text("Best", { GetRenderWidth() / 2 - widgetWidth / 2, 350 }, { 0.f, 0.f }, Globals::TetrisFont, 28.f);
-	m_BestValueText = Text(std::to_string(highScore), { GetRenderWidth() / 2 + widgetWidth / 2, 350 }, { 1.f, 0.f }, Globals::TetrisFont, 28.f);
-	m_LevelText = Text("Level", { GetRenderWidth() / 2 - widgetWidth / 2, 400 }, { 0.f, 0.f }, Globals::TetrisFont, 28.f);
-	m_LevelValueText = Text(std::to_string(level), {GetRenderWidth() / 2 + widgetWidth / 2, 400}, {1.f, 0.f}, Globals::TetrisFont, 28.f);
+	m_ScoreText = Text("Score", { GetRenderWidth() / 2 - widgetWidth / 2, static_cast<int>(300 * Globals::Options.GUIScale) }, { 0.f, 0.f }, Globals::TetrisFont, 28.f * Globals::Options.GUIScale);
+	m_ScoreValueText = Text(std::to_string(currentScore),
+	                        { GetRenderWidth() / 2 + widgetWidth / 2, static_cast<int>(300 * Globals::Options.GUIScale) }, { 1.f, 0.f },
+	                        Globals::TetrisFont, 28.f * Globals::Options.GUIScale);
+	m_BestText = Text("Best", { GetRenderWidth() / 2 - widgetWidth / 2, static_cast<int>(350 * Globals::Options.GUIScale) }, { 0.f, 0.f }, Globals::TetrisFont, 28.f * Globals::Options.GUIScale);
+	m_BestValueText = Text(std::to_string(highScore), { GetRenderWidth() / 2 + widgetWidth / 2, static_cast<int>(350 * Globals::Options.GUIScale) }, { 1.f, 0.f }, Globals::TetrisFont, 28.f * Globals::Options.GUIScale);
+	m_LevelText = Text("Level", { GetRenderWidth() / 2 - widgetWidth / 2, static_cast<int>(400 * Globals::Options.GUIScale) }, { 0.f, 0.f }, Globals::TetrisFont, 28.f * Globals::Options.GUIScale);
+	m_LevelValueText = Text(std::to_string(level), {GetRenderWidth() / 2 + widgetWidth / 2, static_cast<int>(400 * Globals::Options.GUIScale) }, {1.f, 0.f}, Globals::TetrisFont, 28.f * Globals::Options.GUIScale);
 
 	ButtonProperties buttonProperties = {
 		.TextAlignment = ButtonTextAlignment::Center,
 		.Font = &Globals::TetrisFont,
-		.FontSize = 28.f,
+		.FontSize = 28.f * Globals::Options.GUIScale,
 		.FontSpacing = 1.f
 	};
-	m_RetryButton = new Button{ {GetRenderWidth() / 2 - 100, 550}, {200,50}, "Retry", buttonProperties };
+	m_RetryButton = std::make_unique<Button>(Vec2{ static_cast<int>(GetRenderWidth() / 2 - 100 * Globals::Options.GUIScale), static_cast<int>(530 * Globals::Options.GUIScale)}, Vec2{static_cast<int>(200 * Globals::Options.GUIScale),static_cast<int>(50 * Globals::Options.GUIScale)}, "Retry", buttonProperties );
 	m_RetryButton->OnClick = []() {
 		States::Flags::ForceResetBoard = true;
 		Globals::SoundManagerInstance->PlaySoundNowUnique(Globals::Sounds::ClickSound);
@@ -42,7 +44,17 @@ DeathScreen::DeathScreen(uint32_t currentScore, uint32_t highScore, uint32_t lev
 		Globals::SoundManagerInstance->PlaySoundNowUnique(Globals::Sounds::HoverSound);
 	};
 
-	m_ExitButton = new Button{ {GetRenderWidth() / 2 - 100, 630}, {200,50}, "Exit", buttonProperties };
+	m_MainMenuButton = std::make_unique<Button>(Vec2{static_cast<int>(GetRenderWidth() / 2 - 100 * Globals::Options.GUIScale), static_cast<int>(610 * Globals::Options.GUIScale)}, Vec2{static_cast<int>(200 * Globals::Options.GUIScale),static_cast<int>(50 * Globals::Options.GUIScale)}, "Main Menu", buttonProperties );
+	m_MainMenuButton->OnClick = []() {
+		States::ChangeScreen(ScreensE::Main);
+		Globals::SoundManagerInstance->PlaySoundNowUnique(Globals::Sounds::ClickSound);
+		};
+
+	m_MainMenuButton->OnHover = []() {
+		Globals::SoundManagerInstance->PlaySoundNowUnique(Globals::Sounds::HoverSound);
+		};
+
+	m_ExitButton = std::make_unique<Button>(Vec2{static_cast<int>(GetRenderWidth() / 2 - 100 * Globals::Options.GUIScale), static_cast<int>(690 * Globals::Options.GUIScale)}, Vec2{static_cast<int>(200 * Globals::Options.GUIScale),static_cast<int>(50 * Globals::Options.GUIScale)}, "Exit", buttonProperties );
 	m_ExitButton->OnClick = []() {
 		States::ForceClose = true;
 		Globals::SoundManagerInstance->PlaySoundNowUnique(Globals::Sounds::ClickSound);
@@ -73,6 +85,7 @@ void DeathScreen::Update() {
 	//}
 
 	m_RetryButton->Update();
+	m_MainMenuButton->Update();
 	m_ExitButton->Update();
 }
 
@@ -88,5 +101,6 @@ void DeathScreen::Draw() {
 	m_LevelValueText.Draw();
 
 	m_RetryButton->Draw();
+	m_MainMenuButton->Draw();
 	m_ExitButton->Draw();
 }

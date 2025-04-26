@@ -22,8 +22,9 @@ private:
 	const uint32_t m_CurrentScore = 0;
 	const uint32_t m_HighScore = -1;
 	
-	Button* m_RetryButton;
-	Button* m_ExitButton;
+	std::unique_ptr<Button> m_RetryButton;
+	std::unique_ptr<Button> m_ExitButton;
+	std::unique_ptr<Button> m_MainMenuButton;
 	Text m_TitleText;
 	Text m_GameOverText;
 	Text m_ScoreText;

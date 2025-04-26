@@ -4,6 +4,7 @@
 #include "AnimatedSprite.h"
 #include "Options.h"
 #include "SoundManager.h"
+#include "ScoreFileHandler.h"
 
 namespace Globals {
 
@@ -21,7 +22,9 @@ namespace Globals {
 
 	inline std::vector<std::string> GUIScales = {"1.0", "1.1", "1.2", "1.3", "1.4", "1.5"};
 	inline std::unordered_map<float, size_t> GUIScaleToIndexMap = { {1.f, 0}, {1.1f, 1}, {1.2f,2}, {1.3f, 3}, {1.4f, 4}, {1.5f, 5} };
-	
+
+	inline std::unique_ptr<ScoreFileHandler> GScoreFileHandlerInstance;
+
 	namespace Animations {
 		//inline Animation TeeAnimation;
 		//inline Animation ElAnimation;

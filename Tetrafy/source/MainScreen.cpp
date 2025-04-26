@@ -11,7 +11,8 @@ MainScreen::MainScreen() {
 	m_OptionsButton = new Button({ static_cast<int>((GetRenderWidth() - 200 * Globals::Options.GUIScale) / 2), int32_t(380 * Globals::Options.GUIScale) }, { int32_t(200 * Globals::Options.GUIScale) ,int32_t(50 * Globals::Options.GUIScale) }, "Options", buttonProperties);
 	m_ExitButton = new Button({ static_cast<int>((GetRenderWidth() - 200 * Globals::Options.GUIScale) / 2), int32_t(460 * Globals::Options.GUIScale) }, { int32_t(200 * Globals::Options.GUIScale) ,int32_t(50 * Globals::Options.GUIScale) }, "Exit", buttonProperties);
 
-	m_PlayButton->OnClick = []() { 
+	m_PlayButton->OnClick = []() {
+		States::Flags::ForceResetBoard = true; // INFO fix for until  the screen manager will be replaced by the new one
 		States::ChangeScreen(ScreensE::Board);
 		Globals::SoundManagerInstance->PlaySoundNowUnique(Globals::Sounds::ClickSound);
 	};
