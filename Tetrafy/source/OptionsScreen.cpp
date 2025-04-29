@@ -161,12 +161,12 @@ void OptionsScreen::Draw() {
 	m_Title.Draw();
 
 
-	DrawTextEx(Globals::TetrisFont, "Music", m_MusicSwitchTextPos, 28.f * Globals::Options.GUIScale, 1.f, WHITE);
-	DrawTextEx(Globals::TetrisFont, "SFX", m_SFXSwitchTextPos, 28.f * Globals::Options.GUIScale, 1.f, WHITE);
-	DrawTextEx(Globals::TetrisFont, "Soft Drop", m_SoftDropSwitchTextPos, 28.f * Globals::Options.GUIScale, 1.f, WHITE);
-	DrawTextEx(Globals::TetrisFont, "Hard Drop", m_HardDropSwitchTextPos, 28.f * Globals::Options.GUIScale, 1.f, WHITE);
-	DrawTextEx(Globals::TetrisFont, "Landing Preview", m_LandingPreviewSwitchTextPos, 28.f * Globals::Options.GUIScale, 1.f, WHITE);
-	DrawTextEx(Globals::TetrisFont, "GUI Scale", m_GUIScaleCounterTextPos, 28.f * Globals::Options.GUIScale, 1.f, m_ScrBefOptions != ScreensE::Pause ? WHITE : DARKGRAY);
+	DrawTextEx(Globals::TetrisFont, "Music", m_MusicSwitchTextPos.CastAs<Vector2, float>(), 28.f * Globals::Options.GUIScale, 1.f, WHITE);
+	DrawTextEx(Globals::TetrisFont, "SFX", m_SFXSwitchTextPos.CastAs<Vector2, float>(), 28.f * Globals::Options.GUIScale, 1.f, WHITE);
+	DrawTextEx(Globals::TetrisFont, "Soft Drop", m_SoftDropSwitchTextPos.CastAs<Vector2, float>(), 28.f * Globals::Options.GUIScale, 1.f, WHITE);
+	DrawTextEx(Globals::TetrisFont, "Hard Drop", m_HardDropSwitchTextPos.CastAs<Vector2, float>(), 28.f * Globals::Options.GUIScale, 1.f, WHITE);
+	DrawTextEx(Globals::TetrisFont, "Landing Preview", m_LandingPreviewSwitchTextPos.CastAs<Vector2, float>(), 28.f * Globals::Options.GUIScale, 1.f, WHITE);
+	DrawTextEx(Globals::TetrisFont, "GUI Scale", m_GUIScaleCounterTextPos.CastAs<Vector2, float>(), 28.f * Globals::Options.GUIScale, 1.f, m_ScrBefOptions != ScreensE::Pause ? WHITE : DARKGRAY);
 
 
 	m_MusicSwitch->Draw();

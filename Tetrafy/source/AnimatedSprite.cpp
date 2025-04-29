@@ -23,7 +23,7 @@ void AnimatedSprite::Draw(Vec2<int32_t> pos, Color color, float scale) {
 			m_Animation.Rectangles[m_CurrentFrame].width * scale, 
 			m_Animation.Rectangles[m_CurrentFrame].height * scale
 		}, 
-		m_Animation.Origin, 
+		m_Animation.Origin.CastAs<Vector2, float>(),
 		m_Radians, 
 		color
 	);

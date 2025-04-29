@@ -116,7 +116,7 @@ void AnimatedBackground::Element::Draw(Color col) const
 		return;
 	}
 
-	DrawTextureEx(*m_Texture.lock(), m_Pos, m_Rotation, 1.f, col);
+	DrawTextureEx(*m_Texture.lock(), m_Pos.CastAs<Vector2, float>(), m_Rotation, 1.f, col);
 }
 
 void AnimatedBackground::Element::GenerateGoal()
@@ -139,7 +139,6 @@ void AnimatedBackground::Element::GenerateGoal()
 	float moveTime = static_cast<float>(distance) / C_MOVE_SPEED;
 	m_NeededTime = moveTime;
 	m_RotationSpeed = angle / moveTime;
-	printf("moveTime: %f\n", moveTime);
 
 
 	m_PosLastFrame = m_Pos;
@@ -166,7 +165,7 @@ bool AnimatedBackground::Element::CheckGoalCompletion() const
 
 	Vector2 posMin = { std::min(m_Pos.GetX(), m_PosLastFrame.GetX()), std::min(m_Pos.GetY(), m_PosLastFrame.GetY()) };
 	Vector2 posMax = { std::max(m_Pos.GetX(), m_PosLastFrame.GetX()), std::max(m_Pos.GetY(), m_PosLastFrame.GetY()) };
-	if(!CheckCollisionPointLine(m_GoalPos, posMin, posMax, 30)) {
+	if(!CheckCollisionPointLine(m_GoalPos.CastAs<Vector2, float>(), posMin, posMax, 30)) {
 		return false;
 	}
 

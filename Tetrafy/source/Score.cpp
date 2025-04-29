@@ -82,7 +82,7 @@ void SplashText::Draw()
 {
 	Color col = m_Color;
 	col.a *= -(1 / m_LifeTime * m_TimeSinceSpawn) * (1 / m_LifeTime * m_TimeSinceSpawn) * (1 / m_LifeTime * m_TimeSinceSpawn) + 1;
-	DrawTextEx(this->m_Font, m_Text.c_str(), m_Pos, m_FontSize, 1.f, col);
+	DrawTextEx(this->m_Font, m_Text.c_str(), m_Pos.CastAs<Vector2, float>(), m_FontSize, 1.f, col);
 }
 
 bool SplashText::IsEnabled() const

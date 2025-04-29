@@ -1,5 +1,4 @@
 #pragma once
-#include <Raylib.h>
 
 template <typename T>
 class Vec2
@@ -16,6 +15,16 @@ public:
 	constexpr void SetX(T x) { this->x = x; };
 	constexpr void SetY(T y) { this->y = y; };
 
+	template <class C>
+	constexpr Vec2<C> As() const {
+		return Vec2<C>{(C)x, (C)y};
+	}
+
+	template <class C, typename U>
+	constexpr C CastAs() const {
+		return C{(U)x, (U)y};
+	}
+
 	constexpr float Length() const {
 		return sqrt(x * x + y * y);
 	}
@@ -25,6 +34,8 @@ public:
 		if (len == 0) return Vec2(0, 0);  // Avoid divide by zero
 		return Vec2<T>(x / len, y / len);
 	}
+
+
 public:
 	constexpr bool operator==(const Vec2& rhs) const
 	{
@@ -62,7 +73,11 @@ public:
 	{
 		return { this->x * rhs.x, this->y * rhs.y };
 	}
-	constexpr Vec2 operator*(const int rhs) const
+	//constexpr Vec2 operator*(const int rhs) const
+	//{
+	//	return { this->x * rhs, this->y * rhs };
+	//}
+	constexpr Vec2 operator*(const T rhs) const
 	{
 		return { this->x * rhs, this->y * rhs };
 	}
@@ -73,9 +88,6 @@ public:
 	constexpr Vec2 operator/(const int rhs) const
 	{
 		return { this->x / rhs, this->y / rhs };
-	}
-	constexpr operator Vector2() const {
-		return { (float)x,(float)y };
 	}
 
 private:

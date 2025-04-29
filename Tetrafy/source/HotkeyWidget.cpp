@@ -113,18 +113,18 @@ void Hotkey::Update(float deltaTime) {
 void Hotkey::Draw() {
 
 	if (!m_bActive) {
-		DrawTexturePro(m_Properties.InactiveTexture, { 0,0,(float)m_Properties.InactiveTexture.width,(float)m_Properties.InactiveTexture.height }, { (float)m_Pos.GetX(), (float)m_Pos.GetY(), (float)m_Size.GetX(), (float)m_Size.GetY() }, m_Origin, 0.f, WHITE);
+		DrawTexturePro(m_Properties.InactiveTexture, { 0,0,(float)m_Properties.InactiveTexture.width,(float)m_Properties.InactiveTexture.height }, { (float)m_Pos.GetX(), (float)m_Pos.GetY(), (float)m_Size.GetX(), (float)m_Size.GetY() }, m_Origin.CastAs<Vector2, float>(), 0.f, WHITE);
 		m_Text.Draw();
 	}
 	else {
 		if (!m_bFocus) {
-			DrawTexturePro(m_Properties.ActiveTexture, { 0,0,(float)m_Properties.ActiveTexture.width,(float)m_Properties.ActiveTexture.height }, { (float)m_Pos.GetX(), (float)m_Pos.GetY(), (float)m_Size.GetX(), (float)m_Size.GetY() }, m_Origin, 0.f, WHITE);
+			DrawTexturePro(m_Properties.ActiveTexture, { 0,0,(float)m_Properties.ActiveTexture.width,(float)m_Properties.ActiveTexture.height }, { (float)m_Pos.GetX(), (float)m_Pos.GetY(), (float)m_Size.GetX(), (float)m_Size.GetY() }, m_Origin.CastAs<Vector2, float>(), 0.f, WHITE);
 			m_Text.Draw();
 			return;
 		}
 	}
 	if (m_bFocus) {
-		DrawTexturePro(m_Properties.FocusedTexture, { 0,0,(float)m_Properties.FocusedTexture.width,(float)m_Properties.FocusedTexture.height }, { (float)m_Pos.GetX(), (float)m_Pos.GetY(), (float)m_Size.GetX(), (float)m_Size.GetY() }, m_Origin, 0.f, WHITE);
+		DrawTexturePro(m_Properties.FocusedTexture, { 0,0,(float)m_Properties.FocusedTexture.width,(float)m_Properties.FocusedTexture.height }, { (float)m_Pos.GetX(), (float)m_Pos.GetY(), (float)m_Size.GetX(), (float)m_Size.GetY() }, m_Origin.CastAs<Vector2, float>(), 0.f, WHITE);
 		if (m_TextPulseShow) m_Text.Draw();
 	}
 
@@ -151,7 +151,7 @@ bool Hotkey::IsClicked() {
 
 void Hotkey::DrawHoverEffect() {
 	if (/*m_Properties.TextureMode */ true) {
-		DrawTexturePro(m_Properties.HoveredTexture, { 0,0,(float)m_Properties.HoveredTexture.width,(float)m_Properties.HoveredTexture.height }, { (float)m_Pos.GetX(), (float)m_Pos.GetY(), (float)m_Size.GetX(), (float)m_Size.GetY() }, m_Origin, 0.f, WHITE);
+		DrawTexturePro(m_Properties.HoveredTexture, { 0,0,(float)m_Properties.HoveredTexture.width,(float)m_Properties.HoveredTexture.height }, { (float)m_Pos.GetX(), (float)m_Pos.GetY(), (float)m_Size.GetX(), (float)m_Size.GetY() }, m_Origin.CastAs<Vector2, float>(), 0.f, WHITE);
 		return;
 	}
 	/*DrawRectangleRounded({ (float)m_Pos.GetX(), (float)m_Pos.GetY(), (float)m_Size.GetX(), (float)m_Size.GetY() },
@@ -160,7 +160,7 @@ void Hotkey::DrawHoverEffect() {
 
 void Hotkey::DrawClickEffect() {
 	if (/*m_Properties.TextureMode */ true) {
-		DrawTexturePro(m_Properties.ClickedTexture, { 0,0,(float)m_Properties.ClickedTexture.width,(float)m_Properties.ClickedTexture.height }, { (float)m_Pos.GetX(), (float)m_Pos.GetY(), (float)m_Size.GetX(), (float)m_Size.GetY() }, m_Origin, 0.f, WHITE);
+		DrawTexturePro(m_Properties.ClickedTexture, { 0,0,(float)m_Properties.ClickedTexture.width,(float)m_Properties.ClickedTexture.height }, { (float)m_Pos.GetX(), (float)m_Pos.GetY(), (float)m_Size.GetX(), (float)m_Size.GetY() }, m_Origin.CastAs<Vector2, float>(), 0.f, WHITE);
 		return;
 	}
 	/*DrawRectangleRounded({ (float)m_Pos.GetX(), (float)m_Pos.GetY(), (float)m_Size.GetX(), (float)m_Size.GetY() },

@@ -56,7 +56,7 @@ void Button::Draw() {
 	//DrawRectangleRounded(, m_Properties.BorderRoundness, m_Properties.BorderSegments, m_Properties.ForegroundColor);
 	DrawRectangleRounded({ (float)m_Pos.GetX() + m_Properties.BorderSize, (float)m_Pos.GetY() + m_Properties.BorderSize, (float)m_Size.GetX() - 2 * m_Properties.BorderSize, (float)m_Size.GetY() - 2 * m_Properties.BorderSize }, m_Properties.BorderRoundness, m_Properties.BorderSegments, m_Properties.BackgroundColor);
 	
-	DrawTextEx(*m_Properties.Font, m_Text.c_str(), m_TextPos, m_Properties.FontSize, m_Properties.FontSpacing, m_Properties.ForegroundColor);
+	DrawTextEx(*m_Properties.Font, m_Text.c_str(), m_TextPos.CastAs<Vector2, float>(), m_Properties.FontSize, m_Properties.FontSpacing, m_Properties.ForegroundColor);
 	if (IsClicked())
 		DrawClickEffect();
 	else if (IsHovered())
@@ -159,10 +159,10 @@ void TextureButton::Update() {
 
 void TextureButton::Draw() {
 	if (m_bActive) {
-		DrawTexturePro(m_Properties.ActiveTexture, { 0,0,(float)m_Properties.ActiveTexture.width,(float)m_Properties.ActiveTexture.height }, { (float)m_Pos.GetX(), (float)m_Pos.GetY(), (float)m_Size.GetX(), (float)m_Size.GetY() }, m_Origin, 0.f, WHITE);
+		DrawTexturePro(m_Properties.ActiveTexture, { 0,0,(float)m_Properties.ActiveTexture.width,(float)m_Properties.ActiveTexture.height }, { (float)m_Pos.GetX(), (float)m_Pos.GetY(), (float)m_Size.GetX(), (float)m_Size.GetY() }, m_Origin.CastAs<Vector2, float>(), 0.f, WHITE);
 	
 		if (m_Text != "") {
-			DrawTextEx(*m_Properties.Font, m_Text.c_str(), m_TextPos, m_Properties.FontSize, m_Properties.FontSpacing, m_Properties.TextColor);
+			DrawTextEx(*m_Properties.Font, m_Text.c_str(), m_TextPos.CastAs<Vector2, float>(), m_Properties.FontSize, m_Properties.FontSpacing, m_Properties.TextColor);
 		}
 
 		if (IsClicked())
@@ -171,7 +171,7 @@ void TextureButton::Draw() {
 			DrawHoverEffect();
 	}
 	else {
-		DrawTexturePro(m_Properties.InactiveTexture, { 0,0,(float)m_Properties.InactiveTexture.width,(float)m_Properties.InactiveTexture.height }, { (float)m_Pos.GetX(), (float)m_Pos.GetY(), (float)m_Size.GetX(), (float)m_Size.GetY() }, m_Origin, 0.f, WHITE);
+		DrawTexturePro(m_Properties.InactiveTexture, { 0,0,(float)m_Properties.InactiveTexture.width,(float)m_Properties.InactiveTexture.height }, { (float)m_Pos.GetX(), (float)m_Pos.GetY(), (float)m_Size.GetX(), (float)m_Size.GetY() }, m_Origin.CastAs<Vector2, float>(), 0.f, WHITE);
 
 	}
 }
@@ -196,11 +196,11 @@ bool TextureButton::IsClicked() {
 }
 
 void TextureButton::DrawHoverEffect() {
-	DrawTexturePro(m_Properties.HoveredTexture, { 0,0,(float)m_Properties.HoveredTexture.width,(float)m_Properties.HoveredTexture.height }, { (float)m_Pos.GetX(), (float)m_Pos.GetY(), (float)m_Size.GetX(), (float)m_Size.GetY() }, m_Origin, 0.f, WHITE);
+	DrawTexturePro(m_Properties.HoveredTexture, { 0,0,(float)m_Properties.HoveredTexture.width,(float)m_Properties.HoveredTexture.height }, { (float)m_Pos.GetX(), (float)m_Pos.GetY(), (float)m_Size.GetX(), (float)m_Size.GetY() }, m_Origin.CastAs<Vector2, float>(), 0.f, WHITE);
 }
 
 void TextureButton::DrawClickEffect() {
-	DrawTexturePro(m_Properties.ClickedTexture, { 0,0,(float)m_Properties.ClickedTexture.width,(float)m_Properties.ClickedTexture.height }, { (float)m_Pos.GetX(), (float)m_Pos.GetY(), (float)m_Size.GetX(), (float)m_Size.GetY() }, m_Origin, 0.f, WHITE);
+	DrawTexturePro(m_Properties.ClickedTexture, { 0,0,(float)m_Properties.ClickedTexture.width,(float)m_Properties.ClickedTexture.height }, { (float)m_Pos.GetX(), (float)m_Pos.GetY(), (float)m_Size.GetX(), (float)m_Size.GetY() }, m_Origin.CastAs<Vector2, float>(), 0.f, WHITE);
 }
 
 #pragma endregion TextureButton
