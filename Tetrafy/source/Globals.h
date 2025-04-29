@@ -5,6 +5,7 @@
 #include "Options.h"
 #include "SoundManager.h"
 #include "ScoreFileHandler.h"
+#include "AnimatedBackground.h"
 
 namespace Globals {
 
@@ -16,6 +17,7 @@ namespace Globals {
 	inline Font TetrisFontMedium; 
 	inline Keyboard KeyboardManager;
 	inline std::shared_ptr<SoundManager> SoundManagerInstance;
+	inline std::unique_ptr<AnimatedBackground> GAnimatedBackgroundInstance;
 
 	inline int32_t BaseWindowSizeX = 738;
 	inline int32_t BaseWindowSizeY = 800;

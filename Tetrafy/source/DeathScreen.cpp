@@ -74,9 +74,6 @@ DeathScreen::DeathScreen(uint32_t currentScore, uint32_t level)
 		}
 	}
 
-	
-
-
 	ButtonProperties buttonProperties = {
 		.TextAlignment = ButtonTextAlignment::Center,
 		.Font = &Globals::TetrisFont,
@@ -115,24 +112,6 @@ DeathScreen::DeathScreen(uint32_t currentScore, uint32_t level)
 }
 
 void DeathScreen::Update() {
-	//if (m_TitleText == "") {
-	//	if (m_CurrentScore > m_HighScore) {
-	//		m_TitleText = "High Score!";
-	//	}
-	//	else {
-	//		std::vector<std::string> choices = { "Good Job!", "Congrats!", "Nice!", "You Rock!", "Great Round!", "Keep Going!" };
-	//		std::mt19937 RNG{ static_cast<std::mt19937::result_type>(std::chrono::steady_clock::now().time_since_epoch().count()) };
-	//		std::uniform_int_distribution<> m_ChoiceDistribution{ 0, (int32_t)choices.size() - 1 };
-	//		
-	//		m_TitleText = choices[m_ChoiceDistribution(RNG)];
-	//	}
-	//}
-
-	//if (m_TitleTextPos == Vec2{ 0,0 }) {
-	//	Vector2 textsize = MeasureTextEx(Globals::TetrisFontBig, m_TitleText.c_str(), 72.f, 1.f);
-	//	m_TitleTextPos = { (GetRenderWidth() - (int32_t)textsize.x) / 2, 50 };
-	//}
-
 	m_RetryButton->Update();
 	m_MainMenuButton->Update();
 	m_ExitButton->Update();

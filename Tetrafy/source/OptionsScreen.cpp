@@ -5,8 +5,8 @@ OptionsScreen::OptionsScreen()
 	m_Padding *= Globals::Options.GUIScale;
 	m_Title = Text("Options", { GetRenderWidth() / 2,static_cast<int>(125 * Globals::Options.GUIScale) }, { .5f,.5f }, Globals::TetrisFontBig, 72.f * Globals::Options.GUIScale);
 
-	m_MusicSwitchTextPos.SetX(m_MusicSwitchTextPos.GetX() * Globals::Options.GUIScale);
-	m_MusicSwitchTextPos.SetY(m_MusicSwitchTextPos.GetY() * Globals::Options.GUIScale);
+	m_MusicSwitchTextPos.SetX(static_cast<int32_t>(Globals::Options.GUIScale * m_MusicSwitchTextPos.GetX()));
+	m_MusicSwitchTextPos.SetY(static_cast<int32_t>(Globals::Options.GUIScale * m_MusicSwitchTextPos.GetY()));
 
 	Vector2 musicSwitchTextMeasurements = MeasureTextEx(Globals::TetrisFont, "Music", 28.f * Globals::Options.GUIScale, 1.f);
 	m_SFXSwitchTextPos = m_MusicSwitchTextPos + Vec2<int32_t>{0, (int32_t)musicSwitchTextMeasurements.y + m_Padding};
@@ -40,7 +40,10 @@ OptionsScreen::OptionsScreen()
 	};
 
 
-	int32_t maxX = Utils::max<float>({ musicSwitchTextMeasurements.x, SFXSwitchTextMeasurements.x, softDropSwitchTextMeasurements.x, hardDropSwitchTextMeasurements.x, landingPrevwSwitchTextMeasurements.x });
+	int32_t maxX = static_cast<int32_t>(Utils::max<float>({
+		musicSwitchTextMeasurements.x, SFXSwitchTextMeasurements.x, softDropSwitchTextMeasurements.x,
+		hardDropSwitchTextMeasurements.x, landingPrevwSwitchTextMeasurements.x
+	}));
 
 	int32_t switchXCoord = m_MusicSwitchTextPos.GetX() + maxX + m_Padding;
 	Vec2<int32_t> musicSwitchPos		= { switchXCoord, m_MusicSwitchTextPos.GetY() + (int32_t)(musicSwitchTextMeasurements.y - switchProperties.Size.GetY()) / 2};

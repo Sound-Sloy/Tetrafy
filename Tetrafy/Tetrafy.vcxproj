@@ -138,6 +138,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="source\AnimatedBackground.cpp" />
     <ClCompile Include="source\AnimatedSprite.cpp" />
     <ClCompile Include="source\Board.cpp" />
     <ClCompile Include="source\Button.cpp" />
@@ -170,6 +171,7 @@
     <ClCompile Include="source\Text.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="source\AnimatedBackground.h" />
     <ClInclude Include="source\AnimatedSprite.h" />
     <ClInclude Include="source\Board.h" />
     <ClInclude Include="source\Button.h" />

@@ -15,6 +15,16 @@ public:
 	constexpr T GetY() const { return this->y; };
 	constexpr void SetX(T x) { this->x = x; };
 	constexpr void SetY(T y) { this->y = y; };
+
+	constexpr float Length() const {
+		return sqrt(x * x + y * y);
+	}
+
+	constexpr Vec2<T> Normalize() const {
+		float len = Length();
+		if (len == 0) return Vec2(0, 0);  // Avoid divide by zero
+		return Vec2<T>(x / len, y / len);
+	}
 public:
 	constexpr bool operator==(const Vec2& rhs) const
 	{

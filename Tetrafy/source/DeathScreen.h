@@ -21,7 +21,7 @@ public:
 
 private:
 	const uint64_t c_CurrentScore = 0;
-	static constexpr int32_t C_TABLE_COL_SPACING = 15;
+	static constexpr int32_t C_TABLE_COL_SPACING = 30;
 	static constexpr int32_t C_TABLE_ROW_SPACING = 5;
 
 	std::unique_ptr<Button> m_RetryButton;

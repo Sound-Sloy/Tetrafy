@@ -154,6 +154,8 @@ void Game::LoadAssets()
 	Globals::Textures::HotkeyClicked = Globals::Textures::HotkeyActive;
 
 	Globals::SoundManagerInstance = std::make_shared<SoundManager>(Globals::Options, Globals::Sounds::MainTheme);
+
+	Globals::GAnimatedBackgroundInstance = std::make_unique<AnimatedBackground>();
 }
 void Game::UnloadAssets()
 {
@@ -187,6 +189,7 @@ void Game::UnloadAssets()
 void Game::Update()
 {
 	float deltaTime = GetFrameTime();
+	Globals::GAnimatedBackgroundInstance->Update(deltaTime);
 	Globals::SoundManagerInstance->Update();
 	m_ScreenManager->Update(deltaTime);
 }
@@ -194,5 +197,6 @@ void Game::Update()
 void Game::Draw()
 {
 	ClearBackground(Globals::Colors::BackgroundColor);
+	Globals::GAnimatedBackgroundInstance->Draw();
 	m_ScreenManager->Draw();
 }
