@@ -1,7 +1,5 @@
 #include "ScreenManager.h"
 
-#include "external/miniaudio.h"
-
 ScreenManager::ScreenManager()
 {
 	m_Board = std::make_unique<Board>(Vec2{ (int32_t)(100 * Globals::Options.GUIScale), (int32_t)(Globals::Options.GUIScale * 50) }, Vec2{10,20}, 32 * Globals::Options.GUIScale);
