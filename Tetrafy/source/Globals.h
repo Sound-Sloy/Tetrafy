@@ -28,13 +28,6 @@ namespace Globals {
 	inline std::unique_ptr<ScoreFileHandler> GScoreFileHandlerInstance;
 
 	namespace Animations {
-		//inline Animation TeeAnimation;
-		//inline Animation ElAnimation;
-		//inline Animation JayAnimation;
-		//inline Animation StraightAnimation;
-		//inline Animation SquareAnimation;
-		//inline Animation LeftZigZagAnimation;
-		//inline Animation RightZigZagAnimation;
 		inline Animation CellBlinkingAnimation;
 		inline Animation CellDisolveAnimation;
 	}

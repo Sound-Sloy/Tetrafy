@@ -116,7 +116,7 @@ void AnimatedBackground::Element::Draw(Color col) const
 		return;
 	}
 
-	DrawTextureEx(*m_Texture.lock(), m_Pos.CastAs<Vector2, float>(), m_Rotation, 1.f, col);
+	DrawTextureEx(*m_Texture.lock(), m_Pos.CastAs<Vector2, float>(), m_Rotation*RAD2DEG, 1.f, col);
 }
 
 void AnimatedBackground::Element::GenerateGoal()
@@ -134,6 +134,11 @@ void AnimatedBackground::Element::GenerateGoal()
 
 	m_GoalMoveVector = Vec2(distVectorXY(m_RNG), distVectorXY(m_RNG)).Normalize();
 	m_GoalPos = m_GoalPos + m_GoalMoveVector * distance;
+
+	if(!CheckCollisionPointRec(m_GoalPos.CastAs<Vector2, float>(), {0.f,0.f,(float)GetRenderWidth(), (float)GetRenderHeight()})) {
+		//GenerateGoal();
+		return;
+	}
 
 	// compute speeds
 	float moveTime = static_cast<float>(distance) / C_MOVE_SPEED;

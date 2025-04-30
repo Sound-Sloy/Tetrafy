@@ -28,6 +28,7 @@ private:
 	std::unique_ptr<Switch> m_SoftDropSwitch = nullptr;
 	std::unique_ptr<Switch> m_HardDropSwitch = nullptr;
 	std::unique_ptr<Switch> m_LandingPreviewSwitch = nullptr;
+	std::unique_ptr<Switch> m_AnimatedBackgroundSwitch = nullptr;
 	Button m_BackButton;
 	Button m_ControlsButton;
 	std::unique_ptr<Counter> m_GUIScaleCounter = nullptr;
@@ -35,7 +36,7 @@ private:
 	//Slider<float>* m_SFXVolumeSlider;
 
 
-	int32_t m_Padding = 30;
+	int32_t m_Padding = 15;
 
 	Vec2<int32_t> m_MusicSwitchTextPos = { (728 - 229 - m_Padding - 48)/2,200 };
 	Vec2<int32_t> m_SFXSwitchTextPos = { 0,0 };   
@@ -43,4 +44,5 @@ private:
 	Vec2<int32_t> m_HardDropSwitchTextPos = { 0,0 };
 	Vec2<int32_t> m_LandingPreviewSwitchTextPos = { 0,0 };
 	Vec2<int32_t> m_GUIScaleCounterTextPos = { 0,0 };
+	Vec2<int32_t> m_AnimatedBackgroundTextPos = { 0,0 };
 };

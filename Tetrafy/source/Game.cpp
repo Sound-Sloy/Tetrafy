@@ -197,6 +197,9 @@ void Game::Update()
 void Game::Draw()
 {
 	ClearBackground(Globals::Colors::BackgroundColor);
-	Globals::GAnimatedBackgroundInstance->Draw();
+	if(Globals::Options.AnimatedBackgroundToggle) {
+		Globals::GAnimatedBackgroundInstance->Draw();
+	}
+
 	m_ScreenManager->Draw();
 }

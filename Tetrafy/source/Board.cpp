@@ -39,6 +39,7 @@ void Board::Draw() {
 	if (m_Tetrominos.empty()) {
 		return;
 	}
+	DrawRectangle(m_Pos.GetX(), m_Pos.GetY(), m_GridSize.GetX() * (m_CellSize + m_CellPadding) + m_CellPadding, m_GridSize.GetY() * (m_CellSize + m_CellPadding) + m_CellPadding, ColorAlpha(Globals::Colors::BackgroundColor, .8f));
 	DrawRectangleLines(m_Pos.GetX() - 5, m_Pos.GetY() - 5, m_GridSize.GetX() * (m_CellSize + m_CellPadding) + 5 + m_CellPadding, m_GridSize.GetY() * (m_CellSize + m_CellPadding) + 5 + m_CellPadding, WHITE);
 	this->m_Tetrominos.front().Draw();
 	for (auto& cell : this->m_Cells) {

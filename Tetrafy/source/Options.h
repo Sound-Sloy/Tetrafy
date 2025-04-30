@@ -10,6 +10,7 @@ struct OptionsS {
 	bool HardDropToggle = true;
 	bool LandingPreviewToggle = true;
 	float GUIScale = 1.f;
+	bool AnimatedBackgroundToggle = true;
 
 	KeyboardKey KeyLeft = KeyboardKey::KEY_LEFT;
 	KeyboardKey KeyRight = KeyboardKey::KEY_RIGHT;
@@ -36,7 +37,8 @@ inline void to_json(nlohmann::json& j, const OptionsS& p) {
 		{"KeySoftDrop", p.KeySoftDrop},
 		{"KeyHardDrop", p.KeyHardDrop},
 		{"KeyHold", p.KeyHold},
-		{"GUIScale", p.GUIScale}
+		{"GUIScale", p.GUIScale},
+		{"AnimatedBackground", p.AnimatedBackgroundToggle }
 	};
 }
 
@@ -56,4 +58,5 @@ inline void from_json(const nlohmann::json& j, OptionsS& p) {
 	j.at("KeyHardDrop").get_to(p.KeyHardDrop);
 	j.at("KeyHold").get_to(p.KeyHold);
 	j.at("GUIScale").get_to(p.GUIScale);
+	j.at("AnimatedBackground").get_to(p.AnimatedBackgroundToggle);
 }

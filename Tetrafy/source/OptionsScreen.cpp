@@ -9,20 +9,12 @@ OptionsScreen::OptionsScreen()
 	m_MusicSwitchTextPos.SetY(static_cast<int32_t>(Globals::Options.GUIScale * m_MusicSwitchTextPos.GetY()));
 
 	Vector2 musicSwitchTextMeasurements = MeasureTextEx(Globals::TetrisFont, "Music", 28.f * Globals::Options.GUIScale, 1.f);
-	m_SFXSwitchTextPos = m_MusicSwitchTextPos + Vec2<int32_t>{0, (int32_t)musicSwitchTextMeasurements.y + m_Padding};
 	Vector2 SFXSwitchTextMeasurements = MeasureTextEx(Globals::TetrisFont, "SFX", 28.f * Globals::Options.GUIScale, 1.f);
-
-	m_SoftDropSwitchTextPos = m_SFXSwitchTextPos + Vec2<int32_t>{0, (int32_t)SFXSwitchTextMeasurements.y + m_Padding};
 	Vector2 softDropSwitchTextMeasurements = MeasureTextEx(Globals::TetrisFont, "Soft Drop", 28.f * Globals::Options.GUIScale, 1.f);
-
-	m_HardDropSwitchTextPos = m_SoftDropSwitchTextPos + Vec2<int32_t>{0, (int32_t)softDropSwitchTextMeasurements.y + m_Padding};
 	Vector2 hardDropSwitchTextMeasurements = MeasureTextEx(Globals::TetrisFont, "Hard Drop", 28.f * Globals::Options.GUIScale, 1.f);
-	
-	m_LandingPreviewSwitchTextPos = m_HardDropSwitchTextPos + Vec2<int32_t>{0, (int32_t)hardDropSwitchTextMeasurements.y + m_Padding};
 	Vector2 landingPrevwSwitchTextMeasurements = MeasureTextEx(Globals::TetrisFont, "Landing Preview", 28.f * Globals::Options.GUIScale, 1.f);
-
-	m_GUIScaleCounterTextPos = m_LandingPreviewSwitchTextPos + Vec2<int32_t>{0, (int32_t)landingPrevwSwitchTextMeasurements.y + m_Padding};
 	Vector2 guiScaleCounterTextMeasurements = MeasureTextEx(Globals::TetrisFont, "GUI Scale", 28.f * Globals::Options.GUIScale, 1.f);
+	Vector2 animatedBackgroundSwitchMeasurements = MeasureTextEx(Globals::TetrisFont, "Animated Background", 28.f * Globals::Options.GUIScale, 1.f);
 
 	SwitchProperties switchProperties{
 		.Size = { static_cast<int>(48 * Globals::Options.GUIScale),static_cast<int>(24 * Globals::Options.GUIScale) },
@@ -42,23 +34,33 @@ OptionsScreen::OptionsScreen()
 
 	int32_t maxX = static_cast<int32_t>(Utils::max<float>({
 		musicSwitchTextMeasurements.x, SFXSwitchTextMeasurements.x, softDropSwitchTextMeasurements.x,
-		hardDropSwitchTextMeasurements.x, landingPrevwSwitchTextMeasurements.x
+		hardDropSwitchTextMeasurements.x, landingPrevwSwitchTextMeasurements.x, guiScaleCounterTextMeasurements.x, animatedBackgroundSwitchMeasurements.x
 	}));
 
-	int32_t switchXCoord = m_MusicSwitchTextPos.GetX() + maxX + m_Padding;
-	Vec2<int32_t> musicSwitchPos		= { switchXCoord, m_MusicSwitchTextPos.GetY() + (int32_t)(musicSwitchTextMeasurements.y - switchProperties.Size.GetY()) / 2};
-	Vec2<int32_t> SFXSwitchPos			= { switchXCoord, m_SFXSwitchTextPos.GetY() + (int32_t)(SFXSwitchTextMeasurements.y - switchProperties.Size.GetY()) / 2 };
-	Vec2<int32_t> softDropSwitchPos		= { switchXCoord, m_SoftDropSwitchTextPos.GetY() + (int32_t)(softDropSwitchTextMeasurements.y - switchProperties.Size.GetY()) / 2 };
-	Vec2<int32_t> hardDropSwitchPos		= { switchXCoord, m_HardDropSwitchTextPos.GetY() + (int32_t)(hardDropSwitchTextMeasurements.y - switchProperties.Size.GetY()) / 2 };
-	Vec2<int32_t> landingPrevwSwitchPos = { switchXCoord, m_LandingPreviewSwitchTextPos.GetY() + (int32_t)(landingPrevwSwitchTextMeasurements.y - switchProperties.Size.GetY()) / 2 };
-	Vec2<int32_t> guiScaleCounterPos	= { switchXCoord, m_GUIScaleCounterTextPos.GetY() + (int32_t)(guiScaleCounterTextMeasurements.y - counterProperties.Size.GetY()) / 2};
+	m_MusicSwitchTextPos.SetX((GetRenderWidth() - maxX - m_Padding - 48) / 2);
+	m_SFXSwitchTextPos = m_MusicSwitchTextPos + Vec2<int32_t>{0, (int32_t)musicSwitchTextMeasurements.y + m_Padding};
+	m_SoftDropSwitchTextPos = m_SFXSwitchTextPos + Vec2<int32_t>{0, (int32_t)SFXSwitchTextMeasurements.y + m_Padding};
+	m_HardDropSwitchTextPos = m_SoftDropSwitchTextPos + Vec2<int32_t>{0, (int32_t)softDropSwitchTextMeasurements.y + m_Padding};
+	m_LandingPreviewSwitchTextPos = m_HardDropSwitchTextPos + Vec2<int32_t>{0, (int32_t)hardDropSwitchTextMeasurements.y + m_Padding};
+	m_GUIScaleCounterTextPos = m_LandingPreviewSwitchTextPos + Vec2<int32_t>{0, (int32_t)landingPrevwSwitchTextMeasurements.y + m_Padding};
+	m_AnimatedBackgroundTextPos = m_GUIScaleCounterTextPos + Vec2<int32_t>{0, (int32_t)guiScaleCounterTextMeasurements.y + m_Padding};
 
-	m_MusicSwitch			= std::make_unique<Switch>(musicSwitchPos, switchProperties);
-	m_SFXSwitch				= std::make_unique<Switch>(SFXSwitchPos, switchProperties);
-	m_SoftDropSwitch		= std::make_unique<Switch>(softDropSwitchPos, switchProperties);
-	m_HardDropSwitch		= std::make_unique<Switch>(hardDropSwitchPos, switchProperties);
-	m_LandingPreviewSwitch  = std::make_unique<Switch>(landingPrevwSwitchPos, switchProperties);
-	m_GUIScaleCounter		= std::make_unique<Counter>(guiScaleCounterPos, counterProperties);
+	int32_t switchXCoord = m_MusicSwitchTextPos.GetX() + maxX + m_Padding;
+	Vec2<int32_t> musicSwitchPos				= { switchXCoord, m_MusicSwitchTextPos.GetY() + (int32_t)(musicSwitchTextMeasurements.y - switchProperties.Size.GetY()) / 2};
+	Vec2<int32_t> SFXSwitchPos					= { switchXCoord, m_SFXSwitchTextPos.GetY() + (int32_t)(SFXSwitchTextMeasurements.y - switchProperties.Size.GetY()) / 2 };
+	Vec2<int32_t> softDropSwitchPos				= { switchXCoord, m_SoftDropSwitchTextPos.GetY() + (int32_t)(softDropSwitchTextMeasurements.y - switchProperties.Size.GetY()) / 2 };
+	Vec2<int32_t> hardDropSwitchPos				= { switchXCoord, m_HardDropSwitchTextPos.GetY() + (int32_t)(hardDropSwitchTextMeasurements.y - switchProperties.Size.GetY()) / 2 };
+	Vec2<int32_t> landingPrevwSwitchPos			= { switchXCoord, m_LandingPreviewSwitchTextPos.GetY() + (int32_t)(landingPrevwSwitchTextMeasurements.y - switchProperties.Size.GetY()) / 2 };
+	Vec2<int32_t> guiScaleCounterPos			= { switchXCoord, m_GUIScaleCounterTextPos.GetY() + (int32_t)(guiScaleCounterTextMeasurements.y - counterProperties.Size.GetY()) / 2};
+	Vec2<int32_t> animatedBackgroundSwitchPos	= { switchXCoord, m_AnimatedBackgroundTextPos.GetY() + (int32_t)(animatedBackgroundSwitchMeasurements.y - switchProperties.Size.GetY()) / 2};
+
+	m_MusicSwitch					= std::make_unique<Switch>(musicSwitchPos, switchProperties);
+	m_SFXSwitch						= std::make_unique<Switch>(SFXSwitchPos, switchProperties);
+	m_SoftDropSwitch				= std::make_unique<Switch>(softDropSwitchPos, switchProperties);
+	m_HardDropSwitch				= std::make_unique<Switch>(hardDropSwitchPos, switchProperties);
+	m_LandingPreviewSwitch			= std::make_unique<Switch>(landingPrevwSwitchPos, switchProperties);
+	m_GUIScaleCounter				= std::make_unique<Counter>(guiScaleCounterPos, counterProperties);
+	m_AnimatedBackgroundSwitch		= std::make_unique<Switch>(animatedBackgroundSwitchPos, switchProperties);
 
 	m_MusicSwitch->SetState(static_cast<SwitchStatesE>(Globals::Options.MusicToggle));
 	m_SFXSwitch->SetState(static_cast<SwitchStatesE>(Globals::Options.SFXToggle));
@@ -66,7 +68,9 @@ OptionsScreen::OptionsScreen()
 	m_HardDropSwitch->SetState(static_cast<SwitchStatesE>(Globals::Options.HardDropToggle));
 	m_LandingPreviewSwitch->SetState(static_cast<SwitchStatesE>(Globals::Options.LandingPreviewToggle));
 	m_GUIScaleCounter->SetIndex(Globals::GUIScaleToIndexMap[Globals::Options.GUIScale]);
-	
+	m_AnimatedBackgroundSwitch->SetState(static_cast<SwitchStatesE>(Globals::Options.AnimatedBackgroundToggle));
+
+
 
 	m_MusicSwitch->OnHover = [](Vec2<int32_t>) { Globals::SoundManagerInstance->PlaySoundNowUnique(Globals::Sounds::HoverSound); };
 	m_SFXSwitch->OnHover = [](Vec2<int32_t>) { Globals::SoundManagerInstance->PlaySoundNowUnique(Globals::Sounds::HoverSound); };
@@ -74,6 +78,7 @@ OptionsScreen::OptionsScreen()
 	m_HardDropSwitch->OnHover = [](Vec2<int32_t>) { Globals::SoundManagerInstance->PlaySoundNowUnique(Globals::Sounds::HoverSound); };
 	m_LandingPreviewSwitch->OnHover = [](Vec2<int32_t>) { Globals::SoundManagerInstance->PlaySoundNowUnique(Globals::Sounds::HoverSound); };
 	m_GUIScaleCounter->OnHover = [](Vec2<int32_t>) { Globals::SoundManagerInstance->PlaySoundNowUnique(Globals::Sounds::HoverSound); };
+	m_AnimatedBackgroundSwitch->OnHover = [](Vec2<int32_t>) { Globals::SoundManagerInstance->PlaySoundNowUnique(Globals::Sounds::HoverSound); };
 
 
 	m_MusicSwitch->OnChange = [this](SwitchStatesE state) {Globals::Options.MusicToggle = (bool)state;/* m_MusicVolumeSlider->SetActive((bool)state);*/ };
@@ -82,8 +87,8 @@ OptionsScreen::OptionsScreen()
 	m_HardDropSwitch->OnChange = [](SwitchStatesE state) { Globals::Options.HardDropToggle = (bool)state; };
 	m_LandingPreviewSwitch->OnChange = [](SwitchStatesE state) {Globals::Options.LandingPreviewToggle = (bool)state; };
 	m_GUIScaleCounter->OnChange = [](std::string val, int32_t ind) {Globals::Options.GUIScale = 1 + 0.1 * ind; States::Flags::ForceReconstructScreens = true; States::Flags::ForceReloadAssets = true; };
-
-	
+	m_AnimatedBackgroundSwitch->OnChange = [](SwitchStatesE state) {Globals::Options.AnimatedBackgroundToggle = (bool)state; };
+		
 	
 	SliderProperties<float> sliderProperties{
 		.BaseTexture = Globals::Textures::SliderBase,
@@ -149,6 +154,7 @@ void OptionsScreen::Update() {
 	m_HardDropSwitch->Update();
 	m_LandingPreviewSwitch->Update();
 	m_GUIScaleCounter->Update();
+	m_AnimatedBackgroundSwitch->Update();
 
 	//m_MusicVolumeSlider->Update();
 	m_ControlsButton.Update();
@@ -167,6 +173,7 @@ void OptionsScreen::Draw() {
 	DrawTextEx(Globals::TetrisFont, "Hard Drop", m_HardDropSwitchTextPos.CastAs<Vector2, float>(), 28.f * Globals::Options.GUIScale, 1.f, WHITE);
 	DrawTextEx(Globals::TetrisFont, "Landing Preview", m_LandingPreviewSwitchTextPos.CastAs<Vector2, float>(), 28.f * Globals::Options.GUIScale, 1.f, WHITE);
 	DrawTextEx(Globals::TetrisFont, "GUI Scale", m_GUIScaleCounterTextPos.CastAs<Vector2, float>(), 28.f * Globals::Options.GUIScale, 1.f, m_ScrBefOptions != ScreensE::Pause ? WHITE : DARKGRAY);
+	DrawTextEx(Globals::TetrisFont, "Animated Background", m_AnimatedBackgroundTextPos.CastAs<Vector2, float>(), 28.f * Globals::Options.GUIScale, 1.f, WHITE);
 
 
 	m_MusicSwitch->Draw();
@@ -175,6 +182,7 @@ void OptionsScreen::Draw() {
 	m_HardDropSwitch->Draw();
 	m_LandingPreviewSwitch->Draw();
 	m_GUIScaleCounter->Draw();
+	m_AnimatedBackgroundSwitch->Draw();
 
 	
 	//m_MusicVolumeSlider->Draw();
