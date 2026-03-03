@@ -70,8 +70,6 @@ OptionsScreen::OptionsScreen()
 	m_GUIScaleCounter->SetIndex(Globals::GUIScaleToIndexMap[Globals::Options.GUIScale]);
 	m_AnimatedBackgroundSwitch->SetState(static_cast<SwitchStatesE>(Globals::Options.AnimatedBackgroundToggle));
 
-
-
 	m_MusicSwitch->OnHover = [](Vec2<int32_t>) { Globals::SoundManagerInstance->PlaySoundNowUnique(Globals::Sounds::HoverSound); };
 	m_SFXSwitch->OnHover = [](Vec2<int32_t>) { Globals::SoundManagerInstance->PlaySoundNowUnique(Globals::Sounds::HoverSound); };
 	m_SoftDropSwitch->OnHover = [](Vec2<int32_t>) { Globals::SoundManagerInstance->PlaySoundNowUnique(Globals::Sounds::HoverSound); };
@@ -80,7 +78,6 @@ OptionsScreen::OptionsScreen()
 	m_GUIScaleCounter->OnHover = [](Vec2<int32_t>) { Globals::SoundManagerInstance->PlaySoundNowUnique(Globals::Sounds::HoverSound); };
 	m_AnimatedBackgroundSwitch->OnHover = [](Vec2<int32_t>) { Globals::SoundManagerInstance->PlaySoundNowUnique(Globals::Sounds::HoverSound); };
 
-
 	m_MusicSwitch->OnChange = [this](SwitchStatesE state) {Globals::Options.MusicToggle = (bool)state;/* m_MusicVolumeSlider->SetActive((bool)state);*/ };
 	m_SFXSwitch->OnChange = [](SwitchStatesE state) {Globals::Options.SFXToggle = (bool)state; };
 	m_SoftDropSwitch->OnChange = [](SwitchStatesE state) { Globals::Options.SoftDropToggle = (bool)state; };
@@ -88,8 +85,7 @@ OptionsScreen::OptionsScreen()
 	m_LandingPreviewSwitch->OnChange = [](SwitchStatesE state) {Globals::Options.LandingPreviewToggle = (bool)state; };
 	m_GUIScaleCounter->OnChange = [](std::string val, int32_t ind) {Globals::Options.GUIScale = 1 + 0.1 * ind; States::Flags::ForceReconstructScreens = true; States::Flags::ForceReloadAssets = true; };
 	m_AnimatedBackgroundSwitch->OnChange = [](SwitchStatesE state) {Globals::Options.AnimatedBackgroundToggle = (bool)state; };
-		
-	
+			
 	SliderProperties<float> sliderProperties{
 		.BaseTexture = Globals::Textures::SliderBase,
 		.HighlightTexture = Globals::Textures::SliderHighlight,
@@ -107,10 +103,6 @@ OptionsScreen::OptionsScreen()
 		.UpperLimit = 2,
 		.Step = .2f
 	};
-
-	//m_MusicVolumeSlider = std:::make_unique<Slider<float>>({300, 300}, nullptr, sliderProperties);
-	//m_MusicVolumeSlider->OnChange = [](int32_t prevVal, int32_t newVal) {Globals::Values.MusicVolume = newVal / 100.f; };
-	//m_MusicVolumeSlider->SetValue(Globals::Values.MusicVolume * 100.f);
 
 	ButtonProperties buttonProperties{
 		.Font = &Globals::TetrisFont,
@@ -156,16 +148,12 @@ void OptionsScreen::Update() {
 	m_GUIScaleCounter->Update();
 	m_AnimatedBackgroundSwitch->Update();
 
-	//m_MusicVolumeSlider->Update();
 	m_ControlsButton.Update();
 	m_BackButton.Update();
 }
 
 void OptionsScreen::Draw() {
-	//ClearBackground(Globals::Colors::BackgroundColor);
-
 	m_Title.Draw();
-
 
 	DrawTextEx(Globals::TetrisFont, "Music", m_MusicSwitchTextPos.CastAs<Vector2, float>(), 28.f * Globals::Options.GUIScale, 1.f, WHITE);
 	DrawTextEx(Globals::TetrisFont, "SFX", m_SFXSwitchTextPos.CastAs<Vector2, float>(), 28.f * Globals::Options.GUIScale, 1.f, WHITE);
@@ -175,7 +163,6 @@ void OptionsScreen::Draw() {
 	DrawTextEx(Globals::TetrisFont, "GUI Scale", m_GUIScaleCounterTextPos.CastAs<Vector2, float>(), 28.f * Globals::Options.GUIScale, 1.f, m_ScrBefOptions != ScreensE::Pause ? WHITE : DARKGRAY);
 	DrawTextEx(Globals::TetrisFont, "Animated Background", m_AnimatedBackgroundTextPos.CastAs<Vector2, float>(), 28.f * Globals::Options.GUIScale, 1.f, WHITE);
 
-
 	m_MusicSwitch->Draw();
 	m_SFXSwitch->Draw();
 	m_SoftDropSwitch->Draw();
@@ -183,9 +170,7 @@ void OptionsScreen::Draw() {
 	m_LandingPreviewSwitch->Draw();
 	m_GUIScaleCounter->Draw();
 	m_AnimatedBackgroundSwitch->Draw();
-
 	
-	//m_MusicVolumeSlider->Draw();
 	m_ControlsButton.Draw();
 	m_BackButton.Draw();
 

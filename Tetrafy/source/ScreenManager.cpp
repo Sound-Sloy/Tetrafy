@@ -1,23 +1,29 @@
 #include "ScreenManager.h"
 
-ScreenManager::ScreenManager()
-{
-	m_Board = std::make_unique<Board>(Vec2{ (int32_t)(100 * Globals::Options.GUIScale), (int32_t)(Globals::Options.GUIScale * 50) }, Vec2{10,20}, 32 * Globals::Options.GUIScale);
+void ScreenManager::Init() {
+	assert(IsWindowReady());
+
+	m_Board = std::make_unique<Board>(Vec2{ (int32_t)(100 * Globals::Options.GUIScale), (int32_t)(Globals::Options.GUIScale * 50) }, Vec2{ 10,20 }, 32 * Globals::Options.GUIScale);
 	PauseScreenInstance = &m_PauseScreen;
 	if (!PauseScreenInstance) {
 		TraceLog(LOG_FATAL, "PauseScreenInstance == nullptr");
 	}
+	m_bInitialized = true;
 }
 
 void ScreenManager::SetScreen(ScreensE screen) {
+	assert(m_bInitialized);
 	m_Screen = screen;
 }
 
 ScreensE ScreenManager::GetCurrentScreen() const {
+	assert(m_bInitialized);
 	return m_Screen;
 }
 
 void ScreenManager::Update(float deltaTime) {
+	assert(m_bInitialized);
+
 	if (IsKeyPressed(KeyboardKey::KEY_ESCAPE)) {
 		if (m_Screen == ScreensE::Board) {
 			m_Screen = ScreensE::Pause;
@@ -78,6 +84,8 @@ void ScreenManager::Update(float deltaTime) {
 }
 
 void ScreenManager::Draw() {
+	assert(m_bInitialized);
+
 	switch (m_Screen)
 	{
 		case ScreensE::Board: {
@@ -104,5 +112,6 @@ void ScreenManager::Draw() {
 }
 
 ScreenManager* ScreenManager::GetInstance() const {
+	assert(m_bInitialized);
 	return const_cast<ScreenManager*>(this);
 }

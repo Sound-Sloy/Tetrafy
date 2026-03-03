@@ -5,6 +5,8 @@
 #include <raylib.h>
 #include <fstream>
 #include <filesystem>
+#include <thread>
+#include <chrono>
 #include "Globals.h"
 #include "ScreenManager.h"
 #include "Vec2.h"
