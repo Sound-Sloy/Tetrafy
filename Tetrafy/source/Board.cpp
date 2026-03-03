@@ -337,7 +337,8 @@ TetrominosE Board::NextShape() {
 	}
 	if (this->m_NextShapes.size() < 7) {
 		std::deque<TetrominosE> nextBucket = { TetrominosE::Straight, TetrominosE::Tee, TetrominosE::El, TetrominosE::Jay, TetrominosE::LeftZigZag, TetrominosE::RightZigZag, TetrominosE::Square };
-		
+		std::shuffle(nextBucket.begin(), nextBucket.end(), RNG);
+
 		while (this->m_NextShapes.size() > 0 and nextBucket.front() == m_NextShapes.back()) {
 			std::shuffle(nextBucket.begin(), nextBucket.end(), RNG);
 		}
