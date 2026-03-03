@@ -21,7 +21,7 @@ Tetrafy is a modern Tetris clone developed in C++, aiming to deliver a smooth an
 
 - Visit the Tetrafy [Releases](https://github.com/Sound-Sloy/Tetrafy/releases) page.
 
-- Download the latest .zip file (e.g., `Tetrafy.1.2.zip`).
+- Download the latest .zip file (e.g., `Tetrafy.1.3.zip`).
 
 ### 2. Extract the Archive:
 
