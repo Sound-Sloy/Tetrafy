@@ -10,7 +10,9 @@
 
 class ScreenManager {
 public:
-	ScreenManager();
+	ScreenManager() = default;
+
+	void Init();
 
 	void SetScreen(ScreensE screen);
 	ScreensE GetCurrentScreen() const;
@@ -29,6 +31,6 @@ private:
 	OptionsScreen* m_OptionsScreen = new OptionsScreen();
 	MainScreen* m_MainScreen = new MainScreen();
 	ControlsScreen m_ControlsScreen;
-};
 
-//#endif
+	bool m_bInitialized = false;
+};

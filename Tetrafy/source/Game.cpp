@@ -50,7 +50,17 @@ Game::Game(int32_t width, int32_t height, std::string windowTitle)
 
 	Globals::Colors::BackgroundColor = Color(20, 20, 30, 255);
 
+	auto start = std::chrono::steady_clock::now();
+	while (!IsWindowReady() &&
+		std::chrono::steady_clock::now() - start < std::chrono::seconds(2)) {
+		std::this_thread::sleep_for(std::chrono::milliseconds(100));
+	}
+	if (!IsWindowReady()) {
+		throw std::runtime_error("The main window was not ready in time");
+	}
+
 	m_ScreenManager = new ScreenManager();
+	m_ScreenManager->Init();
 
 }
 
