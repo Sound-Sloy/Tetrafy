@@ -40,7 +40,7 @@ Tetrafy is a modern Tetris clone developed in C++, aiming to deliver a smooth an
 ### 1. Clone the project
 
 ```bash
-  git clone https://github.com/Sound-Sloy/Tetrafy
+  git clone --recursive https://github.com/Sound-Sloy/Tetrafy
 ```
 
 ### 2. Go to the project directory
